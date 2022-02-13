@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 })
 export class SharedService {
   readonly APIUrl = 'http://localhost:53535/api';
-  readonly PhotoUrl = 'http://localhost:53535/api/Photos';
+  readonly PhotoUrl = 'http://localhost:53535/api/Photos/';
 
   constructor(private http: HttpClient) {}
 
@@ -44,5 +44,11 @@ export class SharedService {
 
   UploadPhoto(val: any) {
     return this.http.post(this.APIUrl + '/Employee/SaveFile', val);
+  }
+
+  getAllDepartmentNames(): Observable<any[]> {
+    return this.http.get<any[]>(
+      this.APIUrl + '/Employee/GetAllDepartmentNames'
+    );
   }
 }
