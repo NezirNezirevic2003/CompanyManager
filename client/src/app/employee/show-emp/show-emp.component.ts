@@ -25,7 +25,7 @@ export class ShowEmpComponent implements OnInit {
       EmployeeName: '',
       Department: '',
       DateOfJoining: '',
-      PhotoFileName: 'anonymous.png',
+      PhotoFileName: '',
     };
     this.ModalTitle = 'Add Employee';
     this.ActivateAddEditEmpComp = true;
