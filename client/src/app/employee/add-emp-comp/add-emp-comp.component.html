@@ -1,0 +1,79 @@
+<!--
+  This example requires Tailwind CSS v2.0+ 
+  
+  This example requires some changes to your config:
+  
+  ```
+  // tailwind.config.js
+  module.exports = {
+    // ...
+    plugins: [
+      // ...
+      require('@tailwindcss/forms'),
+    ],
+  }
+  ```
+-->
+<div class="max-w-7xl mx-auto px-2 md:px-6 lg:px-80 mt-6">
+  <div>
+    <label for="price" class="block text-md font-medium text-gray-700"
+      >Name</label
+    >
+    <div class="mt-1 relative rounded-md shadow-sm"></div>
+    <input
+      type="text"
+      name="DepartmentName"
+      id="DepartmentName"
+      [(ngModel)]="EmployeeName"
+      [ngModelOptions]="{ standalone: true }"
+      class="focus:ring-indigo-500 focus:border-indigo-500 border-2 border-slate-300 block w-full pl-8 pr-8 h-10 lg:text-lg border-gray-300 rounded-lg"
+      placeholder="Enter employee name"
+    />
+    <label for="price" class="block text-md font-medium text-gray-700 mt-3"
+      >Department</label
+    >
+    <div class="mt-1 relative rounded-md shadow-sm"></div>
+    <select
+      class="focus:ring-indigo-500 focus:border-indigo-500 border-2 border-slate-300 block w-full pl-8 pr-8 h-10 lg:text-lg border-gray-300 rounded-lg"
+      [(ngModel)]="Department"
+      [ngModelOptions]="{ standalone: true }"
+    >
+      <option>Select department</option>
+      <option *ngFor="let depName of DepartmentList">
+        {{ depName.DepartmentName }}
+      </option>
+    </select>
+    <label for="price" class="block text-md font-medium text-gray-700 mt-3"
+      >Date of joining</label
+    >
+    <div class="mt-1 relative rounded-md shadow-sm"></div>
+    <input
+      type="date"
+      name="DateOfJoining"
+      id="DateOfJoining"
+      [(ngModel)]="DateOfJoining"
+      [ngModelOptions]="{ standalone: true }"
+      class="focus:ring-indigo-500 focus:border-indigo-500 border-2 border-slate-300 block w-full pl-10 pr-20 h-10 lg:text-lg border-gray-300 rounded-lg"
+      placeholder="Enter employee's date of join"
+    />
+    <label for="price" class="block text-md font-medium text-gray-700 mt-3"
+      >Upload photo</label
+    >
+    <div class="mt-1 relative rounded-md shadow-sm"></div>
+    <input
+      type="file"
+      name="PhotoFileName"
+      id="PhotoFileName"
+      [(ngModel)]="PhotoFileName"
+      [ngModelOptions]="{ standalone: true }"
+      class="focus:ring-indigo-500 focus:border-indigo-500 border-2 border-slate-300 block w-full pl-10 pr-20 h-10 lg:text-lg border-gray-300 rounded-lg"
+      placeholder="Enter employee name"
+    />
+    <button
+      (click)="addEmployee()"
+      class="w-full mt-3 inline-flex items-center justify-center h-10 border border-transparent text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700"
+    >
+      Add employee
+    </button>
+  </div>
+</div>

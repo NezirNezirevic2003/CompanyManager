@@ -11,7 +11,8 @@ import { ShowEmpComponent } from './employee/show-emp/show-emp.component';
 import { SharedService } from './shared.service';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddEditEmpComponent } from './employee/add-edit-emp/add-edit-emp.component';
+import { AddEmpCompComponent } from './employee/add-emp-comp/add-emp-comp.component';
+import { EditEmpComponent } from './employee/edit-emp/edit-emp.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { AddEditEmpComponent } from './employee/add-edit-emp/add-edit-emp.compon
     AddEditDepComponent,
     EmployeeComponent,
     ShowEmpComponent,
-    AddEditEmpComponent,
+    AddEmpCompComponent,
+    EditEmpComponent,
   ],
   imports: [
     BrowserModule,

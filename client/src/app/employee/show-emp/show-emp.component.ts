@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { themeRulesStandardCreator } from '@fluentui/react';
 import { SharedService } from 'src/app/shared.service';
 
 @Component({
@@ -11,50 +12,37 @@ export class ShowEmpComponent implements OnInit {
 
   EmployeeList: any = [];
 
-  ModalTitle: string;
-  ActivateAddEditEmpComp: boolean = false;
-  emp: any;
+  @Input() emp: any;
+  PhotoFilePath: string;
+  PhotoFileName: 'anonymous.png';
 
   ngOnInit(): void {
     this.refreshEmpList();
   }
 
-  addClick() {
-    this.emp = {
-      EmployeeId: 0,
-      EmployeeName: '',
-      Department: '',
-      DateOfJoining: '',
-      PhotoFileName: '',
-    };
-    this.ModalTitle = 'Add Employee';
-    this.ActivateAddEditEmpComp = true;
-  }
-
-  editClick(item) {
+  editClick(item: any): void {
     console.log(item);
     this.emp = item;
-    this.ModalTitle = 'Edit Employee';
-    this.ActivateAddEditEmpComp = true;
   }
 
-  deleteClick(item) {
-    if (confirm('Are you sure??')) {
-      this.service.deleteEmployee(item.EmployeeId).subscribe((data) => {
-        alert(data.toString());
-        this.refreshEmpList();
-      });
-    }
+  deleteClick(item: { EmployeeId: any }): void {
+    this.service.deleteEmployee(item.EmployeeId).subscribe((data) => {
+      alert(data.toString());
+      this.refreshEmpList();
+    });
   }
 
   closeClick() {
-    this.ActivateAddEditEmpComp = false;
     this.refreshEmpList();
   }
 
-  refreshEmpList() {
+  refreshEmpList(): void {
     this.service.getEmpList().subscribe((data) => {
       this.EmployeeList = data;
+      this.PhotoFilePath = this.service.PhotoUrl + this.PhotoFileName;
+      this.emp = {
+        PhotoFileName: 'anonymous.png',
+      };
     });
   }
 }
