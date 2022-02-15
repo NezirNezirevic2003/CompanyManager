@@ -77,22 +77,27 @@
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a
               href="#"
-              routerLink="/"
               class="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
               aria-current="page"
               >Home</a
             >
+
             <a
               href="#"
-              routerLink="/employee"
               class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >Team</a
+              >Employee</a
             >
+
             <a
               href="#"
-              routerLink="/department"
               class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-              >Departments</a
+              >Projects</a
+            >
+
+            <a
+              href="#"
+              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              >Calendar</a
             >
           </div>
         </div>
@@ -104,6 +109,7 @@
           type="button"
           class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
         >
+          <span class="sr-only">View notifications</span>
           <!-- Heroicon name: outline/bell -->
           <svg
             class="h-6 w-6"
@@ -151,6 +157,12 @@
               From: "transform opacity-100 scale-100"
               To: "transform opacity-0 scale-95"
           -->
+          <!-- <div class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+            Active: "bg-gray-100", Not Active: ""
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
+          </div> -->
         </div>
       </div>
     </div>
@@ -187,4 +199,20 @@
     </div>
   </div>
 </nav>
-<router-outlet></router-outlet>
+<!-- <h1>Home</h1>
+<p>{{ bodyText }}</p>
+<div>
+  <button (click)="openModal('custom-modal-1')">Open Modal 1</button>
+  <button (click)="openModal('custom-modal-2')">Open Modal 2</button>
+</div>
+
+<jw-modal id="custom-modal-1">
+  <h1>A Custom Modal Window!</h1>
+  <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
+  <button (click)="closeModal('custom-modal-1')">Close</button>
+</jw-modal>
+
+<jw-modal id="custom-modal-2">
+  <h1 style="height: 1000px">A Tall Custom Modal Window!</h1>
+  <button (click)="closeModal('custom-modal-2')">Close</button>
+</jw-modal> -->

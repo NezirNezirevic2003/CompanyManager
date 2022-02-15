@@ -1,38 +1,26 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DepartmentComponent } from './department/department.component';
-import { ShowDepComponent } from './department/show-dep/show-dep.component';
-import { AddEditDepComponent } from './department/add-edit-dep/add-edit-dep.component';
-import { EmployeeComponent } from './employee/employee.component';
-import { ShowEmpComponent } from './employee/show-emp/show-emp.component';
-import { SharedService } from './shared.service';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AddEmpCompComponent } from './employee/add-emp-comp/add-emp-comp.component';
-import { EditEmpComponent } from './employee/edit-emp/edit-emp.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
+import { ModalModule } from './_modal';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DepartmentComponent,
-    ShowDepComponent,
-    AddEditDepComponent,
-    EmployeeComponent,
-    ShowEmpComponent,
-    AddEmpCompComponent,
-    EditEmpComponent,
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    ModalModule,
     FormsModule,
-    ReactiveFormsModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {
+      enabled: environment.production,
+      registrationStrategy: 'registerWhenStable:30000',
+    }),
   ],
-  providers: [SharedService],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
