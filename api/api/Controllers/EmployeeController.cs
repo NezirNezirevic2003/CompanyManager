@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
-using System.Data;
+﻿using api.Data;
 using api.Models;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Hosting;
-using System.IO;
-using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace api.Controllers
 {
@@ -14,157 +11,113 @@ namespace api.Controllers
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        private readonly IWebHostEnvironment _env;
+        private readonly UserDbContext _context;
 
-        public EmployeeController(IConfiguration configuration, IWebHostEnvironment env)
+        public EmployeeController(UserDbContext userDbContext)
         {
-            _configuration = configuration;
-            _env = env;
+            _context = userDbContext;
         }
 
-        [HttpGet]
-        public JsonResult Get()
+        [HttpPost("add_employee")]
+        public IActionResult AddEmployee([FromBody] Employee employeeObj)
         {
-            string query = @"
-                    select EmployeeId, EmployeeName, Department,
-                    convert(varchar(10),DateOfJoining,120) as DateOfJoining
-                    ,PhotoFileName
-                    from dbo.Employee
-                    ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            if(employeeObj == null)
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                return BadRequest();
+            }
+            else
+            {
+                _context.employeeModels.Add(employeeObj);
+                _context.SaveChanges();
+                return Ok(new
                 {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader); ;
-
-                    myReader.Close();
-                    myCon.Close();
-                }
+                    StatusCode = 200,
+                    Message = "Employee added Successfully"
+                });
             }
-
-            return new JsonResult(table);
         }
-
-
-        [HttpPost]
-        public JsonResult Post(Employee emp)
+        [HttpPut("update_employee")]
+        public IActionResult UpdateEmployee([FromBody] Employee employeeObj)
         {
-            string query = @"
-                    insert into dbo.Employee 
-                    (EmployeeName,Department,DateOfJoining,PhotoFileName)
-                    values 
-                    (
-                    '" + emp.EmployeeName + @"'
-                    ,'" + emp.Department + @"'
-                    ,'" + emp.DateOfJoining + @"'
-                    ,'" + emp.PhotoFileName + @"'
-                    )
-                    ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            if(employeeObj == null)
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader); ;
-
-                    myReader.Close();
-                    myCon.Close();
-                }
+                return BadRequest();
             }
-
-            return new JsonResult("Added Successfully");
+            var user = _context.employeeModels.AsNoTracking().FirstOrDefault(x=>x.Id == employeeObj.Id);
+            if(user == null)
+            {
+                return NotFound(new
+                {
+                    StatusCode = 404,
+                    Message = "User Not Found"
+                });
+            }
+            else
+            {
+                _context.Entry(employeeObj).State = EntityState.Modified;
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    StatusCode = 200,
+                    Message = "Employee was successfullyy updated"
+                });
+            }
         }
+        [HttpDelete("delete_employee/{id}")]
 
-        [HttpPut]
-        public JsonResult Put(Employee emp)
+        public IActionResult DeleteEmployee(int id)
         {
-            string query = @"
-                    update dbo.Employee set 
-                    EmployeeName = '" + emp.EmployeeName + @"'
-                    ,Department = '" + emp.Department + @"'
-                    ,DateOfJoining = '" + emp.DateOfJoining + @"'
-                    where EmployeeId = " + emp.EmployeeId + @" 
-                    ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            var user = _context.employeeModels.Find(id);
+            if (user == null)
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
+                return NotFound(new
                 {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader); ;
-
-                    myReader.Close();
-                    myCon.Close();
-                }
+                    StatusCode = 404,
+                    Message = "User Not Found"
+                });
             }
-
-            return new JsonResult("Updated Successfully");
+            else
+            {
+                _context.Remove(user);
+                _context.SaveChanges();
+                return Ok(new
+                {
+                    StatusCode = 200,
+                    Message = "User was succesfully deleted"
+                });
+            }
         }
-
-
-        [HttpDelete("{id}")]
-        public JsonResult Delete(int id)
+        [HttpGet("get_all_employees")]
+        public IActionResult GetAllEmployees()
         {
-            string query = @"
-                    delete from dbo.Employee
-                    where EmployeeId = " + id + @" 
-                    ";
-            DataTable table = new DataTable();
-            string sqlDataSource = _configuration.GetConnectionString("EmployeeAppCon");
-            SqlDataReader myReader;
-            using (SqlConnection myCon = new SqlConnection(sqlDataSource))
+            var emplpyee = _context.employeeModels.AsQueryable();
+            return Ok(new
             {
-                myCon.Open();
-                using (SqlCommand myCommand = new SqlCommand(query, myCon))
-                {
-                    myReader = myCommand.ExecuteReader();
-                    table.Load(myReader); ;
-
-                    myReader.Close();
-                    myCon.Close();
-                }
-            }
-
-            return new JsonResult("Deleted Successfully");
+                StatusCode = 200,
+                EmployeeDetails = emplpyee
+            }); ;
         }
-
-
-        [Route("SaveFile")]
-        [HttpPost]
-        public JsonResult SaveFile()
+        [HttpGet("get_employee/id")]
+        public IActionResult GetEmployee(int id)
         {
-            try
+            var employee = _context.employeeModels.Find(id);
+            if(employee == null)
             {
-                var httpRequest = Request.Form;
-                var postedFile = httpRequest.Files[0];
-                string filename = postedFile.FileName;
-                var physicalPath = _env.ContentRootPath + "/Photos/" + filename;
-
-                using (var stream = new FileStream(physicalPath, FileMode.Create))
+                return NotFound(new
                 {
-                    postedFile.CopyTo(stream);
-                }
-
-                return new JsonResult(filename);
+                    StatusCode = 404,
+                    Message = "User Not Found"
+                });
             }
-            catch (Exception)
+            else
             {
-
-                return new JsonResult("anonymous.png");
+                return Ok(new
+                {
+                    StatusCode = 200,
+                    EmployeeDetail = employee
+                });
             }
         }
+
     }
 }

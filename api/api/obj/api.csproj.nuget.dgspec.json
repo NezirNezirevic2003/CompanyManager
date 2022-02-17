@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nezir\\OneDrive\\Documents\\angular\\api\\api\\api.csproj": {}
+    "C:\\Users\\nezir\\OneDrive\\Documents\\api\\api\\api.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nezir\\OneDrive\\Documents\\angular\\api\\api\\api.csproj": {
+    "C:\\Users\\nezir\\OneDrive\\Documents\\api\\api\\api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nezir\\OneDrive\\Documents\\angular\\api\\api\\api.csproj",
+        "projectUniqueName": "C:\\Users\\nezir\\OneDrive\\Documents\\api\\api\\api.csproj",
         "projectName": "api",
-        "projectPath": "C:\\Users\\nezir\\OneDrive\\Documents\\angular\\api\\api\\api.csproj",
+        "projectPath": "C:\\Users\\nezir\\OneDrive\\Documents\\api\\api\\api.csproj",
         "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nezir\\OneDrive\\Documents\\angular\\api\\api\\obj\\",
+        "outputPath": "C:\\Users\\nezir\\OneDrive\\Documents\\api\\api\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,17 +40,21 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+            "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[5.0.0, )"
+              "version": "[5.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.10, )"
+            },
+            "Pomelo.EntityFrameworkCore.MySql": {
+              "target": "Package",
+              "version": "[5.0.1, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"
-            },
-            "System.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.8.3, )"
             }
           },
           "imports": [

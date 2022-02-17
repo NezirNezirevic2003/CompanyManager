@@ -1,11 +1,24 @@
-﻿namespace api.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace api.Models
 {
     public class Employee
     {
-        public int EmployeeId { get; set; }
-        public string EmployeeName { get; set; }
+        [Key]
+        public int Id { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int Salary { get; set; }
+
+        public string Email { get; set; }
+
+        public string MobileNumber { get; set; }
+
         public string Department { get; set; }
-        public string DateOfJoining { get; set; }
-        public string PhotoFileName { get; set; }
+
+
     }
 }

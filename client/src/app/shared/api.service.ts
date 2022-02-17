@@ -45,7 +45,6 @@ export class ApiService {
     );
   }
   signUp(empObj: any) {
-    //return this._http.post<any>(this.loginAPIUrl+"signup",empObj)
     return this._http.post<any>(`${this.loginAPIUrl}signup`, empObj);
   }
   login(empObj: any) {
