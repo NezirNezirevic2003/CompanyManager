@@ -50,7 +50,7 @@
       <input type="hidden" name="remember" value="true" />
       <div class="rounded-md shadow-sm -space-y-px">
         <div>
-          <label for="email-address" class="sr-only">Fullname</label>
+          <label for="fullname" class="sr-only">Fullname</label>
           <input
             formControlName="fullname"
             id="fullname"
@@ -58,53 +58,86 @@
             type="text"
             autocomplete="text"
             required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md rounded-br-md rounded-bl-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             placeholder="Fullname"
           />
+          <span
+            class="text-rose-600"
+            *ngIf="
+              signUpForm.controls['fullname'].dirty &&
+              signUpForm.hasError('required', 'fullname')
+            "
+            >*Full name is required</span
+          >
         </div>
         <div>
-          <label for="email-address" class="sr-only">Username</label>
+          <label for="username" class="sr-only">Username</label>
           <input
             formControlName="username"
             id="username"
             name="username"
             type="text"
-            autocomplete="username"
+            autocomplete="text"
             required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-t-md mt-4 rounded-br-md rounded-bl-md text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             placeholder="Username"
           />
+          <span
+            class="text-rose-600"
+            *ngIf="
+              signUpForm.controls['username'].dirty &&
+              signUpForm.hasError('required', 'username')
+            "
+            >*Username is required</span
+          >
         </div>
         <div>
-          <label for="email-address" class="sr-only">Password</label>
+          <label for="password" class="sr-only">Password</label>
           <input
             formControlName="password"
             id="password"
             name="password"
             type="password"
-            autocomplete="password"
+            autocomplete="text"
             required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-t-md mt-4 rounded-br-md rounded-bl-md text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             placeholder="Password"
           />
+          <span
+            class="text-rose-600"
+            *ngIf="
+              signUpForm.controls['password'].dirty &&
+              signUpForm.hasError('required', 'password')
+            "
+            >*Password is required</span
+          >
         </div>
         <div>
-          <label for="password" class="sr-only">Mobile Number</label>
+          <label for="mobilenumber" class="sr-only">Mobile Number</label>
           <input
             formControlName="mobilenumber"
             id="mobilenumber"
             name="mobilenumber"
             type="tel"
-            autocomplete="current-password"
+            autocomplete="text"
             required
-            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 rounded-t-md mt-4 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
             placeholder="Mobilenumber"
           />
+          <span
+            class="text-rose-600"
+            *ngIf="
+              signUpForm.controls['mobilenumber'].dirty &&
+              signUpForm.hasError('required', 'mobilenumber')
+            "
+            >*Mobilenumber is required</span
+          >
         </div>
       </div>
 
       <div>
         <button
+          [disabled]="!signUpForm.valid"
           type="submit"
           (click)="signUp()"
           class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"

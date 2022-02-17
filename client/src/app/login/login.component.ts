@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ShowDepartmentComponent } from '../department/show-department/show-department.component';
 import { ApiService } from '../shared/api.service';
 import { UserModel } from '../shared/model/user.model';
 @Component({
@@ -21,26 +22,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
-      email: ['', Validators.compose([Validators.required, Validators.email])],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
     localStorage.clear();
   }
   login() {
-    //   this.http.get<any>("http://localhost:3000/signupUsers")
-    //   .subscribe(res=>{
-    //     const user = res.find((a:any)=>{
-    //       return a.email === this.loginForm.value.email && a.password === this.loginForm.value.password
-    //     });
-    //     if(user){
-    //       alert("Login Success!!");
-    //       this.router.navigate(['dashboard']);
-    //         this.loginForm.reset();
-    //     }
-    //   },err=>{
-    //     alert("Something went wrong!!")
-    //   })
-    this.loginObj.UserName = this.loginForm.value.email;
+    this.loginObj.UserName = this.loginForm.value.username;
     this.loginObj.Password = this.loginForm.value.password;
     this.api.login(this.loginObj).subscribe(
       (res) => {
