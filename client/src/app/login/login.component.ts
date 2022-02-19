@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ShowDepartmentComponent } from '../department/show-department/show-department.component';
 import { ApiService } from '../shared/api.service';
 import { UserModel } from '../shared/model/user.model';
 @Component({

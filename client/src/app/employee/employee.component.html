@@ -63,8 +63,11 @@
               </th>
             </tr>
           </thead>
-          <tbody class="bg-white divide-y hover:bg-gray-100 divide-gray-200">
-            <tr *ngFor="let row of employeeData">
+          <tbody class="bg-white divide-y">
+            <tr
+              class="hover:bg-gray-100 divide-gray-200"
+              *ngFor="let row of employeeData"
+            >
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
                   {{ row.firstName }}
@@ -86,13 +89,15 @@
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <button
+                  (click)="openModal('addEmployeeModal')"
+                  (click)="onEdit(row)"
                   type="button"
                   class="rounded-md text-white bg-cyan-500 hover:bg-cyan-600 py-1 px-4"
                 >
                   Edit
                 </button>
                 <button
-                  (click)="openModal('deleteConfirmModal')"
+                  (click)="deleteEmployeeDetail(row)"
                   type="button"
                   class="rounded-md text-white bg-red-500 hover:bg-red-600 py-1 px-4 ml-2"
                 >
@@ -167,8 +172,12 @@
             </div>
           </div>
         </div>
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+        <div
+          *ngFor="let row of employeeData"
+          class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse"
+        >
           <button
+            (click)="deleteEmployeeDetail(row)"
             type="button"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
@@ -209,48 +218,265 @@
       <div
         class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
       >
-        <form class="mt-8 space-y-6">
+        <form [formGroup]="formValue" class="mt-8 space-y-6 px-6">
+          <input type="hidden" name="remember" value="true" />
+          <div>
+            <label for="firstName" class="sr-only">Firstname</label>
+            <input
+              formControlName="firstName"
+              type="text"
+              autocomplete="firstName"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="firstName"
+            />
+          </div>
+          <div>
+            <label for="lastName" class="sr-only">Lastname</label>
+            <input
+              formControlName="lastName"
+              type="text"
+              autocomplete="lastName"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Lastname"
+            />
+          </div>
+          <div>
+            <label for="salary" class="sr-only">Salary</label>
+            <input
+              formControlName="salary"
+              id="salary"
+              name="salary"
+              type="text"
+              autocomplete="salary"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Salary"
+            />
+          </div>
+          <div>
+            <label for="email" class="sr-only">Email</label>
+            <input
+              formControlName="email"
+              type="email"
+              autocomplete="email"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Email"
+            />
+          </div>
+          <div>
+            <label for="mobileNumber" class="sr-only">Mobilenumber</label>
+            <input
+              formControlName="mobileNumber"
+              type="tel"
+              autocomplete="mobileNumber"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Mobilenumber"
+            />
+          </div>
+          <div>
+            <label for="department" class="sr-only">Department</label>
+            <input
+              formControlName="department"
+              type="department"
+              autocomplete="department"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Department"
+            />
+          </div>
           <div>
             <button
-              type="submit"
+              (click)="postEmployeeDetails()"
+              type="button"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-                Heroicon name: solid/lock-closed
-                <svg
-                  class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill-rule="evenodd"
-                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
-                    clip-rule="evenodd"
-                  />
-                </svg>
-              </span>
-              Sign Up
+              Add employee
+            </button>
+            <button
+              (click)="closeModal('addEmployeeModal')"
+              id="closeButton"
+              type="button"
+              class="mt-3 mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Cancel
             </button>
           </div>
         </form>
-        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-          <button
-            type="button"
-            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
-          >
-            Delete
-          </button>
-          <button
-            (click)="closeModal('deleteConfirmModal')"
-            type="button"
-            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-          >
-            Cancel
-          </button>
-        </div>
       </div>
     </div>
   </div>
 </jw-modal>
+
+<!-- <nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <h1 style="color: aliceblue" class="navbar-brand">Angular Crud</h1>
+    <div class="d-flex">
+      <button
+        type="button"
+        id="add-btn"
+        class="btn btn-success"
+        (click)="clickAddEmployee()"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+      >
+        Add Employee
+      </button>
+      <button routerLink="/login" class="btn btn-danger mx-3">Logout</button>
+    </div>
+  </div>
+</nav>
+
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Employee ID</th>
+      <th scope="col">First Name</th>
+      <th scope="col">Last Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mobile No.</th>
+      <th scope="col">Salary</th>
+      <th scope="col">Department</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of employeeData">
+      <td>{{ row.id }}</td>
+      <td>{{ row.firstName }}</td>
+      <td>{{ row.lastName }}</td>
+      <td>{{ row.email }}</td>
+      <td>{{ row.mobile }}</td>
+      <td>&euro; {{ row.salary }}</td>
+      <td>{{ row.department }}</td>
+      <td>
+        <button
+          style="color: #fff"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          class="btn btn-info"
+          (click)="onEdit(row)"
+        >
+          Edit
+        </button>
+        <button
+          [disabled]="role === 'Employee'"
+          style="color: #fff"
+          class="btn btn-danger mx-3"
+          (click)="deleteEmployeeDetail(row)"
+        >
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Employee Details</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >First Name</label
+            >
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Last Name</label
+            >
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label"
+              >Email address</label
+            >
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Mobile Number</label
+            >
+            <input
+              type="text"
+              formControlName="mobile"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Salary</label>
+            <input
+              type="text"
+              formControlName="salary"
+              class="form-control"
+              id="exampleInputPassword1"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="close"
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          *ngIf="showAdd"
+          (click)="postEmployeeDetails()"
+          class="btn btn-primary"
+        >
+          Add
+        </button>
+        <button
+          type="button"
+          *ngIf="showUpdate"
+          (click)="editEmployeeDetail()"
+          class="btn btn-primary"
+        >
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div> -->
