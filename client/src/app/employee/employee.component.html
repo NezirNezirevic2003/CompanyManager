@@ -1,5 +1,6 @@
 <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mt-5">
   <button
+    (click)="clickAddEmployee()"
     (click)="openModal('addEmployeeModal')"
     type="submit"
     class="group relative mb-4 w-48 flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -290,11 +291,20 @@
           </div>
           <div>
             <button
+              *ngIf="showAdd"
               (click)="postEmployeeDetails()"
               type="button"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
-              Add employee
+              Add
+            </button>
+            <button
+              *ngIf="showUpdate"
+              (click)="editEmployeeDetail()"
+              type="button"
+              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Update
             </button>
             <button
               (click)="closeModal('addEmployeeModal')"
