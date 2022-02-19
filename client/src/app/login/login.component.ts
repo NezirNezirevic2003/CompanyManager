@@ -32,7 +32,8 @@ export class LoginComponent implements OnInit {
     this.api.login(this.loginObj).subscribe(
       (res) => {
         alert(res.message);
-        this.router.navigate(['department']);
+        this.router.navigate(['employee']);
+        localStorage.setItem('username', res.username);
         localStorage.setItem('token', res.token);
         localStorage.setItem('userType', res.userType);
       },

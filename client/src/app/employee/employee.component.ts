@@ -68,8 +68,7 @@ export class EmployeeComponent implements OnInit {
     this.employeeObj.Salary = this.formValue.value.salary;
     this.employeeObj.Department = this.formValue.value.department;
     this.api.UpdateEmployee(this.employeeObj).subscribe((res) => {
-      alert('Updated Successfully');
-      let ref = document.getElementById('close');
+      let ref = document.getElementById('closeButton');
       ref?.click();
       this.getEmployeeDetails();
     });
