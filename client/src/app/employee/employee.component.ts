@@ -11,13 +11,15 @@ import { EmployeeModel } from './employee.model';
 })
 export class EmployeeComponent implements OnInit {
   formValue!: FormGroup;
-  employeeData!: any;
+  employeeData: any = [];
   employeeObj: EmployeeModel = new EmployeeModel();
   showAdd!: boolean;
   showUpdate!: boolean;
   @Input() receive!: string;
   @Input() mobileSpecification!: any;
   role: string = '';
+  EmployeeNameFilter: string = '';
+  EmployeeListWithoutFilter: any = [];
   constructor(
     private api: ApiService,
     private formBuilder: FormBuilder,
@@ -36,11 +38,13 @@ export class EmployeeComponent implements OnInit {
     this.getEmployeeDetails();
     this.role = localStorage.getItem('userType')!;
   }
+
   clickAddEmployee() {
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
   }
+
   postEmployeeDetails() {
     this.employeeObj.FirstName = this.formValue.value.firstName;
     this.employeeObj.LastName = this.formValue.value.lastName;
@@ -55,11 +59,13 @@ export class EmployeeComponent implements OnInit {
       this.getEmployeeDetails();
     });
   }
+
   getEmployeeDetails() {
     this.api.GetEmployees().subscribe((res) => {
       this.employeeData = res.employeeDetails;
     });
   }
+
   editEmployeeDetail() {
     this.employeeObj.FirstName = this.formValue.value.firstName;
     this.employeeObj.LastName = this.formValue.value.lastName;
@@ -73,6 +79,7 @@ export class EmployeeComponent implements OnInit {
       this.getEmployeeDetails();
     });
   }
+
   onEdit(row: any) {
     this.employeeObj.Id = row.id;
     this.formValue.controls['firstName'].setValue(row.firstName);
@@ -97,5 +104,31 @@ export class EmployeeComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+
+  FilterFn(): void {
+    var EmployeeNameFilter = this.EmployeeNameFilter;
+
+    this.employeeData = this.EmployeeListWithoutFilter.filter(function (el: {
+      firstName: { toString: () => string };
+    }) {
+      return el.firstName
+        .toString()
+        .toLowerCase()
+        .includes(EmployeeNameFilter.toString().trim().toLowerCase());
+    });
+  }
+
+  sortResult(prop: string | number, asc: any): void {
+    this.employeeData = this.EmployeeListWithoutFilter.sort(function (
+      a: { [x: string]: number },
+      b: { [x: string]: number }
+    ) {
+      if (asc) {
+        return a[prop] > b[prop] ? 1 : a[prop] < b[prop] ? -1 : 0;
+      } else {
+        return b[prop] > a[prop] ? 1 : b[prop] < a[prop] ? -1 : 0;
+      }
+    });
   }
 }

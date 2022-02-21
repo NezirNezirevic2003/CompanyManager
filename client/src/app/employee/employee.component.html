@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mt-5">
   <button
     (click)="clickAddEmployee()"
@@ -24,6 +25,28 @@
     </span>
     Add employee
   </button>
+  <div class="flex start">
+    <div class="flex border-2 rounded mb-4">
+      <input
+        [(ngModel)]="EmployeeNameFilter"
+        (keyup)="FilterFn()"
+        class="px-4 py-1 rounded-md w-80"
+        placeholder="Search..."
+      />
+      <button type="button" (click)="sortResult('firstName', true)">
+        <svg
+          class="w-6 h-5 text-gray-600"
+          fill="currentColor"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
   <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
     <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
       <div
@@ -199,7 +222,7 @@
 
 <jw-modal class="hidden" id="addEmployeeModal">
   <div
-    class="fixed z-10 inset-0 overflow-y-auto"
+    class="fixed z-10 inset-0 overflow-y-auto transition ease-in-out hover:-translate-y-1 hover:scale-110"
     aria-labelledby="modal-title"
     role="dialog"
     aria-modal="true"
@@ -320,173 +343,3 @@
     </div>
   </div>
 </jw-modal>
-
-<!-- <nav class="navbar navbar-light bg-primary">
-  <div class="container-fluid">
-    <h1 style="color: aliceblue" class="navbar-brand">Angular Crud</h1>
-    <div class="d-flex">
-      <button
-        type="button"
-        id="add-btn"
-        class="btn btn-success"
-        (click)="clickAddEmployee()"
-        data-bs-toggle="modal"
-        data-bs-target="#exampleModal"
-      >
-        Add Employee
-      </button>
-      <button routerLink="/login" class="btn btn-danger mx-3">Logout</button>
-    </div>
-  </div>
-</nav>
-
-<table class="table mt-3">
-  <thead>
-    <tr>
-      <th scope="col">Employee ID</th>
-      <th scope="col">First Name</th>
-      <th scope="col">Last Name</th>
-      <th scope="col">Email</th>
-      <th scope="col">Mobile No.</th>
-      <th scope="col">Salary</th>
-      <th scope="col">Department</th>
-      <th scope="col">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let row of employeeData">
-      <td>{{ row.id }}</td>
-      <td>{{ row.firstName }}</td>
-      <td>{{ row.lastName }}</td>
-      <td>{{ row.email }}</td>
-      <td>{{ row.mobile }}</td>
-      <td>&euro; {{ row.salary }}</td>
-      <td>{{ row.department }}</td>
-      <td>
-        <button
-          style="color: #fff"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
-          class="btn btn-info"
-          (click)="onEdit(row)"
-        >
-          Edit
-        </button>
-        <button
-          [disabled]="role === 'Employee'"
-          style="color: #fff"
-          class="btn btn-danger mx-3"
-          (click)="deleteEmployeeDetail(row)"
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Employee Details</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="formValue">
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"
-              >First Name</label
-            >
-            <input
-              type="text"
-              formControlName="firstName"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label"
-              >Last Name</label
-            >
-            <input
-              type="text"
-              formControlName="lastName"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label"
-              >Email address</label
-            >
-            <input
-              type="email"
-              formControlName="email"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label"
-              >Mobile Number</label
-            >
-            <input
-              type="text"
-              formControlName="mobile"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Salary</label>
-            <input
-              type="text"
-              formControlName="salary"
-              class="form-control"
-              id="exampleInputPassword1"
-            />
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          id="close"
-          type="button"
-          class="btn btn-secondary"
-          data-bs-dismiss="modal"
-        >
-          Close
-        </button>
-        <button
-          type="button"
-          *ngIf="showAdd"
-          (click)="postEmployeeDetails()"
-          class="btn btn-primary"
-        >
-          Add
-        </button>
-        <button
-          type="button"
-          *ngIf="showUpdate"
-          (click)="editEmployeeDetail()"
-          class="btn btn-primary"
-        >
-          Update
-        </button>
-      </div>
-    </div>
-  </div>
-</div> -->
