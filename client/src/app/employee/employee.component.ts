@@ -94,9 +94,15 @@ export class EmployeeComponent implements OnInit {
   }
 
   deleteEmployeeDetail(row: any) {
-    this.api.DeleteEmployee(row.id).subscribe((res) => {
+    this.api.DeleteEmployee(this.employeeObj.Id).subscribe((res) => {
+      let ref = document.getElementById('deleteEmployeeButton');
+      ref?.click();
       this.getEmployeeDetails();
     });
+  }
+
+  onDelete(row: any) {
+    this.employeeObj.Id = row.id;
   }
 
   openModal(id: string) {
