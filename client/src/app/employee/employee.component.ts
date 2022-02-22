@@ -15,6 +15,7 @@ export class EmployeeComponent implements OnInit {
   employeeObj: EmployeeModel = new EmployeeModel();
   showAdd!: boolean;
   showUpdate!: boolean;
+  row: any = [];
   @Input() receive!: string;
   @Input() mobileSpecification!: any;
   role: string = '';
@@ -131,4 +132,7 @@ export class EmployeeComponent implements OnInit {
       }
     });
   }
+}
+function click(button: HTMLElement | null) {
+  throw new Error('Function not implemented.');
 }

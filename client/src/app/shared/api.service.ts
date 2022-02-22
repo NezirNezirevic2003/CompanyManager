@@ -1,14 +1,24 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { pipe } from 'rxjs';
 import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
 export class ApiService {
+  public departmentAPIUrl: string = 'https://localhost:44319/api/Department/';
   public loginAPIUrl: string = 'https://localhost:44319/api/Login/';
   public employeeAPIUrl: string = 'https://localhost:44319/api/Employee/';
   constructor(private _http: HttpClient) {}
+
+  GetDepartments() {
+    return this._http
+      .get<any>(`${this.departmentAPIUrl}get_all_departments`)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
 
   PostEmployee(data: any) {
     return this._http
