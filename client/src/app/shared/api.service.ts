@@ -20,6 +20,36 @@ export class ApiService {
       );
   }
 
+  PostDepartment(data: any) {
+    return this._http
+      .post<any>(`${this.departmentAPIUrl}add_department`, data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  UpdateDepartment(data: any) {
+    return this._http
+      .put<any>(`${this.departmentAPIUrl}update_department`, data)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
+  DeleteDepartment(id: number) {
+    return this._http
+      .delete<any>(`${this.departmentAPIUrl}delete_department/` + id)
+      .pipe(
+        map((res: any) => {
+          return res;
+        })
+      );
+  }
+
   PostEmployee(data: any) {
     return this._http
       .post<any>(`${this.employeeAPIUrl}add_employee`, data)

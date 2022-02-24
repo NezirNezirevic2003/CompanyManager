@@ -9,7 +9,6 @@ import { ModalModule } from './_modal';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeComponent } from './employee/employee.component';
 import { DepartmentComponent } from './department/department.component';
-import { ShowDepartmentComponent } from './department/show-department/show-department.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
@@ -21,7 +20,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AppComponent,
     EmployeeComponent,
     DepartmentComponent,
-    ShowDepartmentComponent,
     LoginComponent,
     SignupComponent,
     HeaderComponent,
