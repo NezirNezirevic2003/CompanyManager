@@ -10,6 +10,7 @@ import { DepartmentModel } from './department.model';
   styleUrls: ['./department.component.css'],
 })
 export class DepartmentComponent implements OnInit {
+  departmentName: any;
   formValue!: FormGroup;
   departmentData: any = [];
   departmentObj: DepartmentModel = new DepartmentModel();
@@ -48,6 +49,15 @@ export class DepartmentComponent implements OnInit {
       console.log(res);
       let ref = document.getElementById('closeButton');
       ref?.click();
+      var showAddSuccess = document.getElementById('success-alert');
+      if (showAddSuccess) {
+        showAddSuccess.style.display = 'block';
+      }
+      setTimeout(function () {
+        if (showAddSuccess) {
+          showAddSuccess.style.display = 'none';
+        }
+      }, 4000);
       this.getDepartmentDetails();
     });
   }
@@ -85,5 +95,19 @@ export class DepartmentComponent implements OnInit {
 
   closeModal(id: string) {
     this.modalService.close(id);
+  }
+
+  Search() {
+    if (this.departmentName == '') {
+      this.ngOnInit();
+    } else {
+      this.departmentData = this.departmentData.filter(
+        (res: { departmentName: any }) => {
+          return res.departmentName
+            .toLocaleLowerCase()
+            .match(this.departmentName.toLocaleLowerCase());
+        }
+      );
+    }
   }
 }

@@ -14,6 +14,7 @@ import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     ModalModule,
     ReactiveFormsModule,
     HttpClientModule,
+    Ng2SearchPipeModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: environment.production,
       registrationStrategy: 'registerWhenStable:30000',

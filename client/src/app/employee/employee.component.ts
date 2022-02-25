@@ -10,6 +10,7 @@ import { EmployeeModel } from './employee.model';
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
+  firstName: any;
   formValue!: FormGroup;
   employeeData: any = [];
   employeeObj: EmployeeModel = new EmployeeModel();
@@ -57,6 +58,15 @@ export class EmployeeComponent implements OnInit {
       console.log(res);
       let ref = document.getElementById('closeButton');
       ref?.click();
+      var showAddSuccess = document.getElementById('success-alert');
+      if (showAddSuccess) {
+        showAddSuccess.style.display = 'block';
+      }
+      setTimeout(function () {
+        if (showAddSuccess) {
+          showAddSuccess.style.display = 'none';
+        }
+      }, 4000);
       this.getEmployeeDetails();
     });
   }
@@ -113,32 +123,17 @@ export class EmployeeComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  FilterFn(): void {
-    var EmployeeNameFilter = this.EmployeeNameFilter;
-
-    this.employeeData = this.EmployeeListWithoutFilter.filter(function (el: {
-      firstName: { toString: () => string };
-    }) {
-      return el.firstName
-        .toString()
-        .toLowerCase()
-        .includes(EmployeeNameFilter.toString().trim().toLowerCase());
-    });
+  Search() {
+    if (this.firstName == '') {
+      this.ngOnInit();
+    } else {
+      this.employeeData = this.employeeData.filter(
+        (res: { firstName: any }) => {
+          return res.firstName
+            .toLocaleLowerCase()
+            .match(this.firstName.toLocaleLowerCase());
+        }
+      );
+    }
   }
-
-  sortResult(prop: string | number, asc: any): void {
-    this.employeeData = this.EmployeeListWithoutFilter.sort(function (
-      a: { [x: string]: number },
-      b: { [x: string]: number }
-    ) {
-      if (asc) {
-        return a[prop] > b[prop] ? 1 : a[prop] < b[prop] ? -1 : 0;
-      } else {
-        return b[prop] > a[prop] ? 1 : b[prop] < a[prop] ? -1 : 0;
-      }
-    });
-  }
-}
-function click(button: HTMLElement | null) {
-  throw new Error('Function not implemented.');
 }
