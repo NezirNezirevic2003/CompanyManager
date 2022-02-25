@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,7 +13,6 @@ export class SignupComponent implements OnInit {
   public signupObj = new UserModel();
   constructor(
     private fb: FormBuilder,
-    private http: HttpClient,
     private router: Router,
     private api: ApiService
   ) {}
