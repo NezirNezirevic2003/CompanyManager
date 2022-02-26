@@ -139,7 +139,7 @@
                   type="button"
                   (click)="openModal('addEmployeeModal')"
                   (click)="onEdit(row)"
-                  class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded inline-flex items-center"
+                  class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded inline-flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -160,7 +160,7 @@
                   type="button"
                   (click)="openModal('deleteConfirmModal')"
                   (click)="onDelete(row)"
-                  class="bg-red-600 hover:bg-red-700 ml-2 text-white py-1 px-2 rounded inline-flex items-center"
+                  class="bg-red-600 hover:bg-red-700 ml-2 text-white py-1 px-2 rounded inline-flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -257,7 +257,7 @@
             (click)="closeModal('deleteConfirmModal')"
             id="deleteEmployeeButton"
             type="button"
-            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-gray-200 text-base font-medium text-gray-700 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
           >
             Cancel
           </button>
@@ -299,8 +299,16 @@
               autocomplete="firstName"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="firstName"
+              placeholder="Firstname"
             />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['firstName'].dirty &&
+                formValue.hasError('required', 'firstName')
+              "
+              >*Firstname is required</span
+            >
           </div>
           <div>
             <label for="lastName" class="sr-only">Lastname</label>
@@ -312,6 +320,14 @@
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Lastname"
             />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['lastName'].dirty &&
+                formValue.hasError('required', 'lastName')
+              "
+              >*Lastnam is required</span
+            >
           </div>
           <div>
             <label for="salary" class="sr-only">Salary</label>
@@ -325,6 +341,14 @@
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Salary"
             />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['salary'].dirty &&
+                formValue.hasError('required', 'salary')
+              "
+              >*Salary is required</span
+            >
           </div>
           <div>
             <label for="email" class="sr-only">Email</label>
@@ -336,6 +360,14 @@
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Email"
             />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['email'].dirty &&
+                formValue.hasError('required', 'email')
+              "
+              >*Email is required</span
+            >
           </div>
           <div>
             <label for="mobileNumber" class="sr-only">Mobilenumber</label>
@@ -347,6 +379,14 @@
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Mobilenumber"
             />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['mobileNumber'].dirty &&
+                formValue.hasError('required', 'mobileNumber')
+              "
+              >*Mobilenumber is required</span
+            >
           </div>
           <div>
             <label for="department" class="sr-only">Department</label>
@@ -358,9 +398,18 @@
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Department"
             />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['department'].dirty &&
+                formValue.hasError('required', 'department')
+              "
+              >*Department is required</span
+            >
           </div>
           <div>
             <button
+              [disabled]="!formValue.valid"
               *ngIf="showAdd"
               (click)="postEmployeeDetails()"
               type="button"
@@ -369,6 +418,7 @@
               Add
             </button>
             <button
+              [disabled]="!formValue.valid"
               *ngIf="showUpdate"
               (click)="editEmployeeDetail()"
               type="button"

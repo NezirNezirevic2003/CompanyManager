@@ -11,7 +11,7 @@ namespace api.Models
 
         public string LastName { get; set; }
 
-        public int Salary { get; set; }
+        public string Salary { get; set; }
 
         public string Email { get; set; }
 

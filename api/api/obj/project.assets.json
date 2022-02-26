@@ -843,11 +843,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nezir\\OneDrive\\Documents\\api\\api\\api.csproj",
+      "projectUniqueName": "C:\\Users\\nezir\\OneDrive\\Documents\\CompanyManager\\api\\api\\api.csproj",
       "projectName": "api",
-      "projectPath": "C:\\Users\\nezir\\OneDrive\\Documents\\api\\api\\api.csproj",
+      "projectPath": "C:\\Users\\nezir\\OneDrive\\Documents\\CompanyManager\\api\\api\\api.csproj",
       "packagesPath": "C:\\Users\\nezir\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nezir\\OneDrive\\Documents\\api\\api\\obj\\",
+      "outputPath": "C:\\Users\\nezir\\OneDrive\\Documents\\CompanyManager\\api\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\nezir\\AppData\\Roaming\\NuGet\\NuGet.Config",

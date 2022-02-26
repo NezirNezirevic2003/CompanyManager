@@ -1,11 +1,5 @@
-import {
-  Component,
-  CUSTOM_ELEMENTS_SCHEMA,
-  Input,
-  NgModule,
-  OnInit,
-} from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from '../shared/api.service';
 import { ModalService } from '../_modal';
 import { EmployeeModel } from './employee.model';
@@ -36,12 +30,12 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      firstName: [''],
-      lastName: [''],
-      email: [''],
-      mobileNumber: [''],
-      salary: [''],
-      department: [''],
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', Validators.required],
+      mobileNumber: ['', Validators.required],
+      salary: ['', Validators.required],
+      department: ['', Validators.required],
     });
     this.getEmployeeDetails();
     this.role = localStorage.getItem('userType')!;
