@@ -1,5 +1,6 @@
 const db = require("../config/dbConfig");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports.home = (req, res) => {
   res.send("api working");
@@ -51,11 +52,19 @@ module.exports.login = (req, res) => {
     if (err) throw err;
 
     if (result.length > 0) {
+      let data = {
+        username: result[0].username,
+        password: result[0].password,
+      };
       let checkpassword = await bcrypt.compare(password, result[0].password);
       console.log(checkpassword);
       if (checkpassword == true) {
+        const token = jwt.sign({ data }, "secret");
+        console.log(token);
         res.send({
           status: true,
+          token: token,
+          username: data.username,
           message: "Login succesfull",
         });
       } else {

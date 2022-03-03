@@ -27,15 +27,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loginObj.UserName = this.loginForm.value.username;
-    this.loginObj.Password = this.loginForm.value.password;
+    this.loginObj.username = this.loginForm.value.username;
+    this.loginObj.password = this.loginForm.value.password;
     this.api.login(this.loginObj).subscribe(
       (res) => {
         alert(res.message);
         this.router.navigate(['dashboard']);
         localStorage.setItem('username', res.username);
         localStorage.setItem('token', res.token);
-        localStorage.setItem('userType', res.userType);
       },
       (err) => {
         alert('soomething went wrong');

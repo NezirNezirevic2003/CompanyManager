@@ -8,8 +8,15 @@ import { ModalService } from '../_modal';
 })
 export class HeaderComponent implements OnInit {
   constructor(private modalService: ModalService) {}
+  public userName!: string;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUsername();
+  }
+
+  getUsername() {
+    this.userName == localStorage.getItem('username');
+  }
 
   openModal(id: string) {
     this.modalService.open(id);

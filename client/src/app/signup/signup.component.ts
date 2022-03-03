@@ -19,22 +19,25 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signUpForm = this.fb.group({
-      fullname: ['', Validators.required],
-      mobilenumber: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       username: ['', Validators.required],
+      email: ['', Validators.required],
       password: ['', Validators.required],
+      phonenumber: ['', Validators.required],
     });
   }
 
-  signUp() {
-    this.signupObj.FullName = this.signUpForm.value.fullname;
-    this.signupObj.UserName = this.signUpForm.value.username;
-    this.signupObj.Password = this.signUpForm.value.password;
-    this.signupObj.MobileNumber = this.signUpForm.value.mobilenumber;
-    this.api.signUp(this.signupObj).subscribe((res) => {
-      alert(res.message);
-      this.signUpForm.reset();
-      this.router.navigate(['login']);
-    });
-  }
+  //   signUp() {
+  //     this.signupObj.FullName = this.signUpForm.value.fullname;
+  //     this.signupObj.UserName = this.signUpForm.value.username;
+  //     this.signupObj.Password = this.signUpForm.value.password;
+  //     this.signupObj.MobileNumber = this.signUpForm.value.mobilenumber;
+  //     this.api.signUp(this.signupObj).subscribe((res) => {
+  //       alert(res.message);
+  //       this.signUpForm.reset();
+  //       this.router.navigate(['login']);
+  //     });
+  //   }
+  // }
 }
