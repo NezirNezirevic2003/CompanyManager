@@ -14,7 +14,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
-// import { PopoverComponent } from './popover/popover.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     SignupComponent,
     HeaderComponent,
     DashboardComponent,
-    // PopoverComponent,
   ],
   imports: [
     BrowserModule,
