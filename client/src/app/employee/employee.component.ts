@@ -30,13 +30,13 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      email: ['', Validators.required],
+      firstname: ['', [Validators.required, Validators.minLength(2)]],
+      lastname: ['', [Validators.required, Validators.minLength(2)]],
+      email: ['', [Validators.required, Validators.minLength(6)]],
       dateOfJoining: ['', Validators.required],
       status: ['', Validators.required],
-      salary: ['', Validators.required],
-      phonenumber: ['', Validators.required],
+      salary: ['', [Validators.required, Validators.minLength(1)]],
+      phonenumber: ['', [Validators.required, Validators.minLength(6)]],
     });
     this.getEmployeeDetails();
   }

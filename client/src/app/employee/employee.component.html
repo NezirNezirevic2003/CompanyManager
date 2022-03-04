@@ -329,6 +329,12 @@
               "
               >*Firstname is required</span
             >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['firstname'].errors?.['minlength']"
+            >
+              Firstname must be at least 2 characters long.
+            </span>
           </div>
           <div>
             <label for="lastName" class="sr-only">Lastname</label>
@@ -348,6 +354,12 @@
               "
               >*Lastname is required</span
             >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['lastname'].errors?.['minlength']"
+            >
+              Lastname must be at least 2 characters long.
+            </span>
           </div>
           <div>
             <label for="email" class="sr-only">Email</label>
@@ -369,6 +381,12 @@
               "
               >*Email is required</span
             >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['email'].errors?.['minlength']"
+            >
+              Email must be at least 6 characters long.
+            </span>
           </div>
           <div>
             <label for="dateOfJoining" class="sr-only">Date of Joining</label>
@@ -391,14 +409,16 @@
           </div>
           <div>
             <label for="status" class="sr-only">Status</label>
-            <input
+            <select
               formControlName="status"
-              type="text"
-              autocomplete="status"
               required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Status"
-            />
+              class="rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+            >
+              <option value="fulltime">Fulltime</option>
+              <option value="partime">Partime</option>
+              <option value="internship">Internship</option>
+              <option value="other">Other</option>
+            </select>
             <span
               class="text-rose-600 mb-0 text-sm"
               *ngIf="
@@ -418,6 +438,12 @@
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Salary"
             />
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['salary'].errors?.['minlength']"
+            >
+              Salary must be at least 1 characters long.
+            </span>
             <span
               class="text-rose-600 mb-0 text-sm"
               *ngIf="
@@ -445,6 +471,12 @@
               "
               >*Phonenumber is required</span
             >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['phonenumber'].errors?.['minlength']"
+            >
+              Phonenumber must be at least 6 characters long.
+            </span>
           </div>
           <div>
             <button
