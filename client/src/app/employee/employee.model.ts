@@ -1,6 +1,6 @@
 export class EmployeeModel {
   id: number = 0;
-  firstame: string = '';
+  firstname: string = '';
   lastname: string = '';
   email: string = '';
   dateOfJoining: string = '';

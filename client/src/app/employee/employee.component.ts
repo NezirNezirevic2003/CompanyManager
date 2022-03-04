@@ -48,7 +48,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   postEmployeeDetails() {
-    this.employeeObj.firstame = this.formValue.value.firstname;
+    this.employeeObj.firstname = this.formValue.value.firstname;
     this.employeeObj.lastname = this.formValue.value.lastname;
     this.employeeObj.email = this.formValue.value.email;
     this.employeeObj.dateOfJoining = this.formValue.value.dateOfJoining;
@@ -79,29 +79,32 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  editEmployeeDetail() {
-    this.employeeObj.firstame = this.formValue.value.firstName;
-    this.employeeObj.lastname = this.formValue.value.lastName;
+  editEmployeeDetail(id: any) {
+    this.employeeObj.firstname = this.formValue.value.firstname;
+    this.employeeObj.lastname = this.formValue.value.lastname;
     this.employeeObj.email = this.formValue.value.email;
     this.employeeObj.dateOfJoining = this.formValue.value.dateOfJoining;
     this.employeeObj.status = this.formValue.value.status;
     this.employeeObj.salary = this.formValue.value.salary;
     this.employeeObj.phonenumber = this.formValue.value.phonenumber;
-    this.api.UpdateEmployee(this.employeeObj).subscribe((res) => {
-      let ref = document.getElementById('closeButton');
-      ref?.click();
-      this.getEmployeeDetails();
-    });
+    this.api
+      .UpdateEmployee(this.employeeObj, this.employeeObj.id)
+      .subscribe((res) => {
+        let ref = document.getElementById('closeButton');
+        ref?.click();
+        this.getEmployeeDetails();
+      });
   }
 
-  onEdit(row: any) {
-    this.employeeObj.id = row.id;
-    this.formValue.controls['firstName'].setValue(row.firstName);
-    this.formValue.controls['lastName'].setValue(row.lastName);
-    this.formValue.controls['email'].setValue(row.email);
-    this.formValue.controls['mobileNumber'].setValue(row.mobileNumber);
-    this.formValue.controls['salary'].setValue(row.salary);
-    this.formValue.controls['department'].setValue(row.department);
+  onEdit(data: any) {
+    this.employeeObj.id = data.id;
+    this.formValue.controls['firstname'].setValue(data.firstname);
+    this.formValue.controls['lastname'].setValue(data.lastname);
+    this.formValue.controls['email'].setValue(data.email);
+    this.formValue.controls['dateOfJoining'].setValue(data.dateOfJoining);
+    this.formValue.controls['status'].setValue(data.status);
+    this.formValue.controls['salary'].setValue(data.salary);
+    this.formValue.controls['phonenumber'].setValue(data.phonenumber);
     this.showUpdate = true;
     this.showAdd = false;
   }

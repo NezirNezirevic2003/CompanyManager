@@ -68,9 +68,9 @@ export class ApiService {
         })
       );
   }
-  UpdateEmployee(data: any) {
+  UpdateEmployee(data: any, id: any) {
     return this._http
-      .put<any>(`${this.employeeAPIUrl}update_employee`, data)
+      .put<any>(`${this.employeeAPIUrl}update_employee/${id}`, data)
       .pipe(
         map((res: any) => {
           return res;
