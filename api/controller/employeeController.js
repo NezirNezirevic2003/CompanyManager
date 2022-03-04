@@ -74,3 +74,21 @@ module.exports.employee_update = (req, res) => {
     }
   });
 };
+
+module.exports.delete_employee = (req, res) => {
+  const id = req.params.id;
+
+  let deleteEmployeeQuery = `DELETE from employee WHERE id = '${id}'`;
+
+  db.query(deleteEmployeeQuery, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+
+    if (result) {
+      res.send({
+        status: true,
+        message: "Employee was deleted succesfully",
+      });
+    }
+  });
+};

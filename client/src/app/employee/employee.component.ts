@@ -10,13 +10,13 @@ import { EmployeeModel } from './employee.model';
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
-  firstName: any;
+  firstname: any;
   formValue!: FormGroup;
   employeeData: any = [];
   employeeObj: EmployeeModel = new EmployeeModel();
   showAdd!: boolean;
   showUpdate!: boolean;
-  row: any = [];
+  data: any = [];
   @Input() receive!: string;
   @Input() mobileSpecification!: any;
   role: string = '';
@@ -30,15 +30,15 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required],
       email: ['', Validators.required],
-      mobileNumber: ['', Validators.required],
+      dateOfJoining: ['', Validators.required],
+      status: ['', Validators.required],
       salary: ['', Validators.required],
-      department: ['', Validators.required],
+      phonenumber: ['', Validators.required],
     });
     this.getEmployeeDetails();
-    this.role = localStorage.getItem('userType')!;
   }
 
   clickAddEmployee() {
@@ -48,12 +48,13 @@ export class EmployeeComponent implements OnInit {
   }
 
   postEmployeeDetails() {
-    this.employeeObj.FirstName = this.formValue.value.firstName;
-    this.employeeObj.LastName = this.formValue.value.lastName;
-    this.employeeObj.Email = this.formValue.value.email;
-    this.employeeObj.MobileNumber = this.formValue.value.mobileNumber;
-    this.employeeObj.Salary = this.formValue.value.salary;
-    this.employeeObj.Department = this.formValue.value.department;
+    this.employeeObj.firstame = this.formValue.value.firstname;
+    this.employeeObj.lastname = this.formValue.value.lastname;
+    this.employeeObj.email = this.formValue.value.email;
+    this.employeeObj.dateOfJoining = this.formValue.value.dateOfJoining;
+    this.employeeObj.status = this.formValue.value.status;
+    this.employeeObj.salary = this.formValue.value.salary;
+    this.employeeObj.phonenumber = this.formValue.value.phonenumber;
     this.api.PostEmployee(this.employeeObj).subscribe((res) => {
       console.log(res);
       let ref = document.getElementById('closeButton');
@@ -73,17 +74,19 @@ export class EmployeeComponent implements OnInit {
 
   getEmployeeDetails() {
     this.api.GetEmployees().subscribe((res) => {
-      this.employeeData = res.employeeDetails;
+      this.employeeData = res.data;
+      // console.log(this.employeeData);
     });
   }
 
   editEmployeeDetail() {
-    this.employeeObj.FirstName = this.formValue.value.firstName;
-    this.employeeObj.LastName = this.formValue.value.lastName;
-    this.employeeObj.Email = this.formValue.value.email;
-    this.employeeObj.MobileNumber = this.formValue.value.mobileNumber;
-    this.employeeObj.Salary = this.formValue.value.salary;
-    this.employeeObj.Department = this.formValue.value.department;
+    this.employeeObj.firstame = this.formValue.value.firstName;
+    this.employeeObj.lastname = this.formValue.value.lastName;
+    this.employeeObj.email = this.formValue.value.email;
+    this.employeeObj.dateOfJoining = this.formValue.value.dateOfJoining;
+    this.employeeObj.status = this.formValue.value.status;
+    this.employeeObj.salary = this.formValue.value.salary;
+    this.employeeObj.phonenumber = this.formValue.value.phonenumber;
     this.api.UpdateEmployee(this.employeeObj).subscribe((res) => {
       let ref = document.getElementById('closeButton');
       ref?.click();
@@ -92,7 +95,7 @@ export class EmployeeComponent implements OnInit {
   }
 
   onEdit(row: any) {
-    this.employeeObj.Id = row.id;
+    this.employeeObj.id = row.id;
     this.formValue.controls['firstName'].setValue(row.firstName);
     this.formValue.controls['lastName'].setValue(row.lastName);
     this.formValue.controls['email'].setValue(row.email);
@@ -103,16 +106,16 @@ export class EmployeeComponent implements OnInit {
     this.showAdd = false;
   }
 
-  deleteEmployeeDetail(row: any) {
-    this.api.DeleteEmployee(this.employeeObj.Id).subscribe((res) => {
+  deleteEmployeeDetail(data: any) {
+    this.api.DeleteEmployee(this.employeeObj.id).subscribe((res) => {
       let ref = document.getElementById('deleteEmployeeButton');
       ref?.click();
       this.getEmployeeDetails();
     });
   }
 
-  onDelete(row: any) {
-    this.employeeObj.Id = row.id;
+  onDelete(data: any) {
+    this.employeeObj.id = data.id;
   }
 
   openModal(id: string) {
@@ -124,14 +127,14 @@ export class EmployeeComponent implements OnInit {
   }
 
   Search() {
-    if (this.firstName == '') {
+    if (this.firstname == '') {
       this.ngOnInit();
     } else {
       this.employeeData = this.employeeData.filter(
-        (res: { firstName: any }) => {
-          return res.firstName
+        (res: { firstname: any }) => {
+          return res.firstname
             .toLocaleLowerCase()
-            .match(this.firstName.toLocaleLowerCase());
+            .match(this.firstname.toLocaleLowerCase());
         }
       );
     }

@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 export class ApiService {
   public departmentAPIUrl: string = 'https://localhost:44319/api/Department/';
   public loginAPIUrl: string = 'http://localhost:3000/api/';
-  public employeeAPIUrl: string = 'https://localhost:44319/api/Employee/';
+  public employeeAPIUrl: string = 'http://localhost:3000/api/';
   constructor(private _http: HttpClient) {}
 
   GetDepartments() {
@@ -52,7 +52,7 @@ export class ApiService {
 
   PostEmployee(data: any) {
     return this._http
-      .post<any>(`${this.employeeAPIUrl}add_employee`, data)
+      .post<any>(`${this.employeeAPIUrl}employee_post`, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -78,7 +78,7 @@ export class ApiService {
       );
   }
   GetEmployees() {
-    return this._http.get<any>(`${this.employeeAPIUrl}get_all_employees`).pipe(
+    return this._http.get<any>(`${this.employeeAPIUrl}employees`).pipe(
       map((res: any) => {
         return res;
       })

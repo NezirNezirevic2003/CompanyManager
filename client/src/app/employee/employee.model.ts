@@ -1,9 +1,10 @@
 export class EmployeeModel {
-  Id: number = 0;
-  FirstName: string = '';
-  LastName: string = '';
-  Email: string = '';
-  MobileNumber: string = '';
-  Salary: string = '';
-  Department: string = '';
+  id: number = 0;
+  firstame: string = '';
+  lastname: string = '';
+  email: string = '';
+  dateOfJoining: string = '';
+  status: string = '';
+  salary: string = '';
+  phonenumber: string = '';
 }

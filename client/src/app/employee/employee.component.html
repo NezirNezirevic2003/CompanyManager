@@ -27,8 +27,8 @@
   <div class="flex start">
     <div class="flex border-2 rounded-md mb-4">
       <input
-        [(ngModel)]="firstName"
-        name="firstName"
+        [(ngModel)]="firstname"
+        name="firstname"
         (ngModelChange)="Search()"
         class="px-4 py-1 rounded-md w-80 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
         placeholder="Search..."
@@ -70,7 +70,7 @@
                 scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Name
+                Firstname
               </th>
               <th
                 scope="col"
@@ -82,13 +82,31 @@
                 scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
+                Email
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Date of Joining
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
+                Status
+              </th>
+              <th
+                scope="col"
+                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+              >
                 Salary
               </th>
               <th
                 scope="col"
                 class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Department
+                Phonenumber
               </th>
               <th
                 scope="col"
@@ -101,32 +119,46 @@
           <tbody class="bg-white divide-y">
             <tr
               class="hover:bg-gray-100 divide-gray-200"
-              *ngFor="let row of employeeData"
+              *ngFor="let data of employeeData"
             >
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
-                  {{ row.firstName }}
-                </div>
-                <div class="text-sm text-gray-500">{{ row.email }}</div>
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">
-                  {{ row.lastName }}
+                  {{ data.firstname }}
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">&euro; {{ row.salary }}</div>
+                <div class="text-sm text-gray-900">
+                  {{ data.lastname }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">{{ data.email }}</div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
-                  {{ row.department }}
+                  {{ data.dateOfJoining }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                  {{ data.status }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                  {{ data.salary }}
+                </div>
+              </td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">
+                  {{ data.phonenumber }}
                 </div>
               </td>
               <td class="px-6 py-4 whitespace-nowrap">
                 <button
                   type="button"
                   (click)="openModal('addEmployeeModal')"
-                  (click)="onEdit(row)"
+                  (click)="onEdit(data)"
                   class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded inline-flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
                 >
                   <svg
@@ -147,7 +179,7 @@
                 <button
                   type="button"
                   (click)="openModal('deleteConfirmModal')"
-                  (click)="onDelete(row)"
+                  (click)="onDelete(data)"
                   class="bg-red-600 hover:bg-red-700 ml-2 text-white py-1 px-2 rounded inline-flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600"
                 >
                   <svg
@@ -236,7 +268,7 @@
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
           <button
-            (click)="deleteEmployeeDetail(row.id)"
+            (click)="deleteEmployeeDetail(data.id)"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
             Delete
@@ -280,11 +312,11 @@
         <form [formGroup]="formValue" class="mt-8 space-y-6 px-6">
           <input type="hidden" name="remember" value="true" />
           <div>
-            <label for="firstName" class="sr-only">Firstname</label>
+            <label for="firstname" class="sr-only">Firstname</label>
             <input
-              formControlName="firstName"
+              formControlName="firstname"
               type="text"
-              autocomplete="firstName"
+              autocomplete="firstname"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Firstname"
@@ -292,8 +324,8 @@
             <span
               class="text-rose-600 mb-0 text-sm"
               *ngIf="
-                formValue.controls['firstName'].dirty &&
-                formValue.hasError('required', 'firstName')
+                formValue.controls['firstname'].dirty &&
+                formValue.hasError('required', 'firstname')
               "
               >*Firstname is required</span
             >
@@ -301,9 +333,9 @@
           <div>
             <label for="lastName" class="sr-only">Lastname</label>
             <input
-              formControlName="lastName"
+              formControlName="lastname"
               type="text"
-              autocomplete="lastName"
+              autocomplete="lastname"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
               placeholder="Lastname"
@@ -311,19 +343,76 @@
             <span
               class="text-rose-600 mb-0 text-sm"
               *ngIf="
-                formValue.controls['lastName'].dirty &&
-                formValue.hasError('required', 'lastName')
+                formValue.controls['lastname'].dirty &&
+                formValue.hasError('required', 'lastname')
               "
-              >*Lastnam is required</span
+              >*Lastname is required</span
+            >
+          </div>
+          <div>
+            <label for="email" class="sr-only">Email</label>
+            <input
+              formControlName="email"
+              id="email"
+              name="email"
+              type="email"
+              autocomplete="email"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Emai"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['email'].dirty &&
+                formValue.hasError('required', 'email')
+              "
+              >*Email is required</span
+            >
+          </div>
+          <div>
+            <label for="dateOfJoining" class="sr-only">Date of Joining</label>
+            <input
+              formControlName="dateOfJoining"
+              type="date"
+              autocomplete="dateOfJoining"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Date of Joining"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['dateOfJoining'].dirty &&
+                formValue.hasError('required', 'dateOfJoining')
+              "
+              >*dateOfJoining is required</span
+            >
+          </div>
+          <div>
+            <label for="status" class="sr-only">Status</label>
+            <input
+              formControlName="status"
+              type="text"
+              autocomplete="status"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Status"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['status'].dirty &&
+                formValue.hasError('required', 'status')
+              "
+              >*Status is required</span
             >
           </div>
           <div>
             <label for="salary" class="sr-only">Salary</label>
             <input
               formControlName="salary"
-              id="salary"
-              name="salary"
-              type="text"
+              type="number"
               autocomplete="salary"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -339,60 +428,22 @@
             >
           </div>
           <div>
-            <label for="email" class="sr-only">Email</label>
+            <label for="phonenumber" class="sr-only">Phonenumber</label>
             <input
-              formControlName="email"
-              type="email"
-              autocomplete="email"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Email"
-            />
-            <span
-              class="text-rose-600 mb-0 text-sm"
-              *ngIf="
-                formValue.controls['email'].dirty &&
-                formValue.hasError('required', 'email')
-              "
-              >*Email is required</span
-            >
-          </div>
-          <div>
-            <label for="mobileNumber" class="sr-only">Mobilenumber</label>
-            <input
-              formControlName="mobileNumber"
+              formControlName="phonenumber"
               type="tel"
-              autocomplete="mobileNumber"
+              autocomplete="phonenumber"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Mobilenumber"
+              placeholder="Phonenumber"
             />
             <span
               class="text-rose-600 mb-0 text-sm"
               *ngIf="
-                formValue.controls['mobileNumber'].dirty &&
-                formValue.hasError('required', 'mobileNumber')
+                formValue.controls['phonenumber'].dirty &&
+                formValue.hasError('required', 'phonenumber')
               "
-              >*Mobilenumber is required</span
-            >
-          </div>
-          <div>
-            <label for="department" class="sr-only">Department</label>
-            <input
-              formControlName="department"
-              type="department"
-              autocomplete="department"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Department"
-            />
-            <span
-              class="text-rose-600 mb-0 text-sm"
-              *ngIf="
-                formValue.controls['department'].dirty &&
-                formValue.hasError('required', 'department')
-              "
-              >*Department is required</span
+              >*Phonenumber is required</span
             >
           </div>
           <div>
