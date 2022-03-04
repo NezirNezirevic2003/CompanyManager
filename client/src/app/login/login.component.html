@@ -68,6 +68,12 @@
           "
           >*Username is required</span
         >
+        <span
+          class="text-rose-600 text-sm"
+          *ngIf="loginForm.controls['username'].errors?.['minlength']"
+        >
+          Username must be at least 6 characters long.
+        </span>
       </div>
       <div>
         <label for="password" class="sr-only">Password</label>
@@ -89,6 +95,12 @@
           "
           >*Password is required</span
         >
+        <span
+          class="text-rose-600 text-sm"
+          *ngIf="loginForm.controls['password'].errors?.['minlength']"
+        >
+          Username must be at least 8 characters long.
+        </span>
       </div>
 
       <div>
