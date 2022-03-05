@@ -37,7 +37,7 @@
           placeholder="Username"
         />
         <span
-          class="text-rose-600"
+          class="text-rose-600 text-sm"
           *ngIf="
             loginForm.controls['username'].dirty &&
             loginForm.hasError('required', 'username')
@@ -64,7 +64,7 @@
           placeholder="Password"
         />
         <span
-          class="text-rose-600"
+          class="text-rose-600 text-sm"
           *ngIf="
             loginForm.controls['password'].dirty &&
             loginForm.hasError('required', 'password')

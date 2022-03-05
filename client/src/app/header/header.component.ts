@@ -8,18 +8,33 @@ import { ModalService } from '../_modal';
 })
 export class HeaderComponent implements OnInit {
   constructor(private modalService: ModalService) {}
-  public userName!: string;
 
-  ngOnInit(): void {
-    this.getUsername();
-  }
-
-  getUsername() {
-    this.userName == localStorage.getItem('username');
-  }
+  ngOnInit(): void {}
 
   openModal(id: string) {
     this.modalService.open(id);
+  }
+
+  openMenu() {
+    var mobileButton = document.getElementById('mobileButton');
+    var menu = document.getElementById('mobile-menu');
+    var closeButton = document.getElementById('closeButton');
+    if (mobileButton?.click) {
+      menu!.style.display = 'block';
+      mobileButton!.style.display = 'none';
+      closeButton!.style.display = 'block';
+    }
+  }
+
+  closeMenu() {
+    var mobileButton = document.getElementById('mobileButton');
+    var menu = document.getElementById('mobile-menu');
+    var closeButton = document.getElementById('closeButton');
+    if (closeButton?.click) {
+      menu!.style.display = 'none';
+      mobileButton!.style.display = 'block';
+      closeButton!.style.display = 'none';
+    }
   }
 
   closeModal(id: string) {
