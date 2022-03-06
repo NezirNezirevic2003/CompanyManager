@@ -1,0 +1,24 @@
+{
+  "name": "companymanager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "concurrently": "^7.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "cd client && ng serve",
+    "dev": "concurrently \"cd api && npm run start\" \"npm run start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NezirNezirevic2003/CompanyManager.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NezirNezirevic2003/CompanyManager/issues"
+  },
+  "homepage": "https://github.com/NezirNezirevic2003/CompanyManager#readme"
+}
