@@ -4,9 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "concurrently": "npm start \"cd..\"cd client && ng serve\""
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
@@ -20,6 +19,9 @@
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "nodemailer": "^6.7.2"
+  },
+  "engines": {
+    "node": "16.13.1."
   },
   "devDependencies": {
     "dotenv": "^16.0.0",

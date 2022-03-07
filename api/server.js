@@ -17,6 +17,9 @@ const routes = require("./routes/router.js");
 app.use(bodyparser.json());
 
 app.use("/api", routes);
+app.get("/", (req, res) => {
+  res.send("hello");
+});
 
 app.listen(3000, (err) => {
   if (err) throw err;
