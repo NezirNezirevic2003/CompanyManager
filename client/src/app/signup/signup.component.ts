@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
     this.signupObj.phonenumber = this.signUpForm.value.phonenumber;
 
     this.api.signUp(this.signupObj).subscribe((res) => {
-      alert(res.message);
+      // alert(res.message);
       this.signUpForm.reset();
       this.router.navigate(['login']);
     });

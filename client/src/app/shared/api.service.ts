@@ -6,8 +6,9 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
   public departmentAPIUrl: string = 'https://localhost:44319/api/Department/';
-  public loginAPIUrl: string = 'http://localhost:3000/api/';
-  public employeeAPIUrl: string = 'http://localhost:3000/api/';
+  public loginAPIUrl: string = 'https://companymanager-api.herokuapp.com/api/';
+  public employeeAPIUrl: string =
+    'https://companymanager-api.herokuapp.com/api/';
   constructor(private _http: HttpClient) {}
 
   GetDepartments() {
