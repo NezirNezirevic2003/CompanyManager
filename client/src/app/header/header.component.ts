@@ -26,6 +26,14 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  openProfile() {
+    var profileButton = document.getElementById('user-menu-button');
+    var profileMenu = document.getElementById('profileMenu');
+    if (profileButton?.click) {
+      profileMenu!.style.display = 'block';
+    }
+  }
+
   closeMenu() {
     var mobileButton = document.getElementById('mobileButton');
     var menu = document.getElementById('mobile-menu');

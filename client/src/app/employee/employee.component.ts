@@ -57,8 +57,6 @@ export class EmployeeComponent implements OnInit {
     this.employeeObj.phonenumber = this.formValue.value.phonenumber;
     this.api.PostEmployee(this.employeeObj).subscribe((res) => {
       console.log(res);
-      let ref = document.getElementById('closeButton');
-      ref?.click();
       var showAddSuccess = document.getElementById('success-alert');
       if (showAddSuccess) {
         showAddSuccess.style.display = 'block';
@@ -90,9 +88,9 @@ export class EmployeeComponent implements OnInit {
     this.api
       .UpdateEmployee(this.employeeObj, this.employeeObj.id)
       .subscribe((res) => {
-        let ref = document.getElementById('closeButton');
-        ref?.click();
         this.getEmployeeDetails();
+        // let button = document.getElementById('closeButton');
+        // button?.click();
       });
   }
 

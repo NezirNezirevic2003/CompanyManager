@@ -104,23 +104,26 @@
           <div class="flex space-x-4">
             <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a
+              routerLinkActive="bg-indigo-700"
               routerLink="/dashboard"
               href="#"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              class="text-white hover:bg-indigo-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >Dashboard</a
             >
 
             <a
+              routerLinkActive="bg-indigo-700"
               routerLink="/employee"
               href="#"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              class="text-white hover:bg-indigo-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >Team</a
             >
 
             <a
+              routerLinkActive="bg-indigo-700"
               routerLink="/department"
               href="#"
-              class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+              class="text-white hover:bg-indigo-800 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
               >Departments</a
             >
           </div>
@@ -156,6 +159,8 @@
         <div class="ml-3 relative">
           <div>
             <button
+              (click)="openProfile()"
+              id="profileButton"
               type="button"
               class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
               id="user-menu-button"
@@ -171,6 +176,7 @@
             </button>
           </div>
           <div
+            id="profileMenu"
             class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
             aria-orientation="vertical"
@@ -195,6 +201,7 @@
               >Settings</a
             >
             <a
+              routerLink="/login"
               href="#"
               class="block px-4 py-2 text-sm text-gray-700"
               role="menuitem"

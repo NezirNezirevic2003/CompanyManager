@@ -11,7 +11,6 @@ module.exports.employees = (req, res) => {
         message: "User",
         data: result,
       });
-      console.log(result);
     }
   });
 };
