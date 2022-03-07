@@ -31,7 +31,6 @@ export class LoginComponent implements OnInit {
     this.loginObj.password = this.loginForm.value.password;
     this.api.login(this.loginObj).subscribe(
       (res) => {
-        alert(res.message);
         this.router.navigate(['dashboard']);
         localStorage.setItem('username', res.username);
         localStorage.setItem('token', res.token);
