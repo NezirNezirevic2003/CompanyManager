@@ -1,12 +1,13 @@
 const db = require("../config/dbConfig");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 module.exports.home = (req, res) => {
   res.send("api working");
 };
 
-module.exports.signup = (req, res) => {
+module.exports.signup = async (req, res) => {
   console.log(req.body);
   const firstname = req.body.firstname;
   const lastname = req.body.lastname;
@@ -30,11 +31,34 @@ module.exports.signup = (req, res) => {
       decrtpypwd = await bcrypt.hash(password, 10);
 
       let insertquery = `INSERT INTO user(firstname, lastname,username, email, password, phonenumber) VALUES('${firstname}','${lastname}', '${username}', '${email}', '${decrtpypwd}', '${phonenumber}')`;
-      db.query(insertquery, (err, result) => {
+      db.query(insertquery, async (err, result) => {
         if (err) throw err;
         res.send({
           status: true,
           message: "Registration successful",
+        });
+
+        const transporter = nodemailer.createTransport({
+          host: "Gmail",
+          auth: {
+            user: "nezirnezirevic310@gmail.com",
+            pass: "rhrabjjvfjnfkerr",
+          },
+        });
+
+        const mailOptions = {
+          from: "nezirnezirevic310@gmail.com",
+          to: "nezirevicnezir089@gmail.com",
+          subject: "Sending email",
+          text: "wooooow",
+        };
+
+        transporter.sendMail(mailOptions, function (err, info) {
+          if (err) {
+            console.log(err);
+            return;
+          }
+          console.log(info.response);
         });
       });
     }
