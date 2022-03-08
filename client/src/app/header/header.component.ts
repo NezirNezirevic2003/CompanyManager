@@ -8,8 +8,11 @@ import { ModalService } from '../_modal';
 })
 export class HeaderComponent implements OnInit {
   constructor(private modalService: ModalService) {}
+  username: any = [];
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.username = localStorage.getItem('username');
+  }
 
   openModal(id: string) {
     this.modalService.open(id);
@@ -27,7 +30,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openProfile() {
-    var profileButton = document.getElementById('user-menu-button');
+    var profileButton = document.getElementById('profileButton');
     var profileMenu = document.getElementById('profileMenu');
     if (profileButton?.click) {
       profileMenu!.style.display = 'block';

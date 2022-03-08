@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['dashboard']);
         localStorage.setItem('username', res.username);
         localStorage.setItem('token', res.token);
+        localStorage.setItem('cookie', res.cookie);
       },
       (err) => {
         this.router.navigate(['login']);

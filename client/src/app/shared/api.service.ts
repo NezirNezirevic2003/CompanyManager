@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 })
 export class ApiService {
   public departmentAPIUrl: string = 'https://localhost:44319/api/Department/';
-  public loginAPIUrl: string = 'https://companymanager-api.herokuapp.com/api/';
+  public loginAPIUrl: string = 'http://localhost:5000/api/';
   public employeeAPIUrl: string =
     'https://companymanager-api.herokuapp.com/api/';
   constructor(private _http: HttpClient) {}
@@ -69,6 +69,7 @@ export class ApiService {
         })
       );
   }
+
   UpdateEmployee(data: any, id: any) {
     return this._http
       .put<any>(`${this.employeeAPIUrl}update_employee/${id}`, data)
@@ -78,6 +79,7 @@ export class ApiService {
         })
       );
   }
+
   GetEmployees() {
     return this._http.get<any>(`${this.employeeAPIUrl}employees`).pipe(
       map((res: any) => {
@@ -85,9 +87,11 @@ export class ApiService {
       })
     );
   }
+
   signUp(empObj: any) {
     return this._http.post<any>(`${this.loginAPIUrl}signup`, empObj);
   }
+
   login(empObj: any) {
     return this._http.post<any>(`${this.loginAPIUrl}login`, empObj);
   }
