@@ -1,9 +1,7 @@
-<!-- This example requires Tailwind CSS v2.0+ -->
 <nav class="bg-gray-800">
   <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
     <div class="relative flex items-center justify-between h-16">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
         <button
           (click)="openMenu()"
           id="mobileButton"
@@ -13,13 +11,6 @@
           aria-expanded="false"
         >
           <span class="sr-only">Open main menu</span>
-          <!--
-            Icon when menu is closed.
-
-            Heroicon name: outline/menu
-
-            Menu open: "hidden", Menu closed: "block"
-          -->
           <svg
             class="block h-6 w-6"
             xmlns="http://www.w3.org/2000/svg"
@@ -35,13 +26,6 @@
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
-          <!--
-            Icon when menu is open.
-
-            Heroicon name: outline/x
-
-            Menu open: "block", Menu closed: "hidden"
-          -->
         </button>
         <button
           (click)="closeMenu()"
@@ -84,7 +68,6 @@
         </div>
         <div class="hidden sm:block sm:ml-6">
           <div class="flex space-x-4">
-            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
             <a
               routerLinkActive="bg-indigo-700"
               routerLink="/dashboard"
@@ -119,7 +102,6 @@
           class="bg-gray-800 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white mr-3"
         >
           <span class="sr-only">View notifications</span>
-          <!-- Heroicon name: outline/bell -->
           <svg
             class="h-6 w-6"
             xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +118,6 @@
             />
           </svg>
         </button>
-        <!-- Profile dropdown -->
         <div class="ml-3 relative">
           <div>
             <button
@@ -150,17 +131,6 @@
               {{ this.username }}
             </button>
           </div>
-
-          <!--
-            Dropdown menu, show/hide based on menu state.
-
-            Entering: "transition ease-out duration-100"
-              From: "transform opacity-0 scale-95"
-              To: "transform opacity-100 scale-100"
-            Leaving: "transition ease-in duration-75"
-              From: "transform opacity-100 scale-100"
-              To: "transform opacity-0 scale-95"
-          -->
           <div
             class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
             role="menu"
@@ -169,7 +139,6 @@
             aria-labelledby="user-menu-button"
             tabindex="-1"
           >
-            <!-- Active: "bg-gray-100", Not Active: "" -->
             <a
               class="block px-4 py-2 text-sm text-gray-700"
               role="menuitem"
@@ -198,10 +167,8 @@
     </div>
   </div>
 
-  <!-- Mobile menu, show/hide based on menu state. -->
   <div class="hidden" id="mobile-menu">
     <div class="px-2 pt-2 pb-3 space-y-1">
-      <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
       <a
         routerLink="/dashboard"
         href="#"
