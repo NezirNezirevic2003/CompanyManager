@@ -29,8 +29,8 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
-    this.signupObj.firstname = this.signUpForm.value.fullname;
-    this.signupObj.lastname = this.signUpForm.value.username;
+    this.signupObj.firstname = this.signUpForm.value.firstname;
+    this.signupObj.lastname = this.signUpForm.value.lastname;
     this.signupObj.username = this.signUpForm.value.username;
     this.signupObj.email = this.signUpForm.value.email;
     this.signupObj.password = this.signUpForm.value.password;

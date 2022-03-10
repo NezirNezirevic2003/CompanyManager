@@ -10,10 +10,11 @@ import { EmployeeComponent } from './employee/employee.component';
 import { DepartmentComponent } from './department/department.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { InterceptorService } from './loader/interceptor.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
     }),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

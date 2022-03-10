@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { LoaderService } from './loader/loader.service';
 
 @Component({
   selector: 'app-root',
@@ -9,5 +10,5 @@ export class AppComponent {
   @Input()
   bodyText!: string;
 
-  constructor() {}
+  constructor(public loader: LoaderService) {}
 }
