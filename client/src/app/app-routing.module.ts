@@ -8,7 +8,6 @@ import { AuthGuard } from './shared/auth.guard';
 import { SignupComponent } from './signup/signup.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: 'department',
     component: DepartmentComponent,
@@ -24,8 +23,8 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+  { path: '', component: LoginComponent, pathMatch: 'full' },
 ];
 
 @NgModule({
