@@ -6,7 +6,9 @@
   "dependencies": {
     "concurrently": "^7.0.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "lite-server": "^2.6.1"
+  },
   "scripts": {
     "start": "cd client && ng serve",
     "dev": "concurrently \"cd api && npm run start\" \"npm run start\""

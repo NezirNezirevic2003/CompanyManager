@@ -17,11 +17,11 @@ const routes = require("./routes/router.js");
 app.use(bodyparser.json());
 
 app.use("/api", routes);
-app.get("/", (req, res) => {
-  res.send("hello");
+app.get("/", function (req, res) {
+  res.send("Hello");
 });
 
-app.listen(3000, (err) => {
+app.listen(process.env.PORT || 5000, (err) => {
   if (err) throw err;
-  console.log("server running");
+  console.log(`server running on http://localhost:5000`);
 });

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../shared/api.service';
 import { ModalService } from '../_modal';
 import { DepartmentModel } from './department.model';
@@ -10,13 +10,13 @@ import { DepartmentModel } from './department.model';
   styleUrls: ['./department.component.css'],
 })
 export class DepartmentComponent implements OnInit {
-  departmentName: any;
+  name: any;
   formValue!: FormGroup;
   departmentData: any = [];
   departmentObj: DepartmentModel = new DepartmentModel();
   showAdd!: boolean;
   showUpdate!: boolean;
-  row: any = [];
+  data: any = [];
   constructor(
     private api: ApiService,
     private modalService: ModalService,
@@ -25,7 +25,8 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
-      departmentName: [''],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      description: ['', [Validators.required, Validators.minLength(10)]],
     });
     this.getDepartmentDetails();
   }
@@ -36,15 +37,17 @@ export class DepartmentComponent implements OnInit {
     this.showUpdate = false;
   }
 
-  onEdit(row: any) {
-    this.departmentObj.Id = row.id;
-    this.formValue.controls['departmentName'].setValue(row.departmentName);
+  onEdit(data: any) {
+    this.departmentObj.id = data.id;
+    this.formValue.controls['name'].setValue(data.name);
+    this.formValue.controls['description'].setValue(data.description);
     this.showUpdate = true;
     this.showAdd = false;
   }
 
   postDepartmentDetails() {
-    this.departmentObj.DepartmentName = this.formValue.value.departmentName;
+    this.departmentObj.name = this.formValue.value.name;
+    this.departmentObj.description = this.formValue.value.description;
     this.api.PostDepartment(this.departmentObj).subscribe((res) => {
       console.log(res);
       let ref = document.getElementById('closeButton');
@@ -62,30 +65,34 @@ export class DepartmentComponent implements OnInit {
     });
   }
 
-  editDepartmentDetail() {
-    this.departmentObj.DepartmentName = this.formValue.value.departmentName;
-    this.api.UpdateDepartment(this.departmentObj).subscribe((res) => {
-      let ref = document.getElementById('closeButton');
-      ref?.click();
-      this.getDepartmentDetails();
-    });
+  editDepartmentDetail(id: any) {
+    this.departmentObj.name = this.formValue.value.name;
+    this.departmentObj.description = this.formValue.value.description;
+    this.api
+      .UpdateDepartment(this.departmentObj, this.departmentObj.id)
+      .subscribe((res) => {
+        let ref = document.getElementById('closeButton');
+        ref?.click();
+        this.getDepartmentDetails();
+      });
   }
 
-  deleteDepartmentDetail(row: any) {
-    this.api.DeleteDepartment(this.departmentObj.Id).subscribe((res) => {
+  deleteDepartmentDetail(data: any) {
+    this.api.DeleteDepartment(this.departmentObj.id).subscribe((res) => {
       let ref = document.getElementById('deleteDepartmentButton');
       ref?.click();
       this.getDepartmentDetails();
     });
   }
 
-  onDelete(row: any) {
-    this.departmentObj.Id = row.id;
+  onDelete(data: any) {
+    this.departmentObj.id = data.id;
   }
 
   getDepartmentDetails() {
     this.api.GetDepartments().subscribe((res) => {
-      this.departmentData = res.departmentDetails;
+      this.departmentData = res.data;
+      console.log(this.departmentData);
     });
   }
 
@@ -98,16 +105,14 @@ export class DepartmentComponent implements OnInit {
   }
 
   Search() {
-    if (this.departmentName == '') {
+    if (this.name == '') {
       this.ngOnInit();
     } else {
-      this.departmentData = this.departmentData.filter(
-        (res: { departmentName: any }) => {
-          return res.departmentName
-            .toLocaleLowerCase()
-            .match(this.departmentName.toLocaleLowerCase());
-        }
-      );
+      this.departmentData = this.departmentData.filter((res: { name: any }) => {
+        return res.name
+          .toLocaleLowerCase()
+          .match(this.name.toLocaleLowerCase());
+      });
     }
   }
 }

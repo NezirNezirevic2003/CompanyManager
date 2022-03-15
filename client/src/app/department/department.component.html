@@ -25,26 +25,16 @@
     Add department
   </button>
   <div class="flex start">
-    <div class="flex border-2 rounded mb-4">
+    <div
+      class="flex border-2 rounded-md mb-4 lg:max-w-80 md:max-w-80 sm:max-w-sm w-full"
+    >
       <input
-        [(ngModel)]="departmentName"
-        name="departmentName"
+        [(ngModel)]="name"
+        name="name"
         (ngModelChange)="Search()"
-        class="px-4 py-1 rounded-md w-80"
+        class="px-4 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 lg:max-w-80 md:max-w-80 sm:max-w-sm w-full"
         placeholder="Search..."
       />
-      <button type="button">
-        <svg
-          class="w-6 h-5 text-gray-600"
-          fill="currentColor"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-        >
-          <path
-            d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"
-          />
-        </svg>
-      </button>
     </div>
   </div>
   <div
@@ -84,13 +74,13 @@
                 scope="col"
                 class="px-28 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Id
+                Name
               </th>
               <th
                 scope="col"
                 class="px-28 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
               >
-                Name
+                Description
               </th>
               <th
                 scope="col"
@@ -103,23 +93,23 @@
           <tbody class="bg-white divide-y">
             <tr
               class="hover:bg-gray-100 divide-gray-200"
-              *ngFor="let row of departmentData"
+              *ngFor="let data of departmentData"
             >
               <td class="px-28 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
-                  {{ row.id }}
+                  {{ data.name }}
                 </div>
               </td>
               <td class="px-28 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">
-                  {{ row.departmentName }}
+                  {{ data.description }}
                 </div>
               </td>
               <td class="px-6 py-4">
                 <button
                   type="button"
                   (click)="openModal('addDepartmentModal')"
-                  (click)="onEdit(row)"
+                  (click)="onEdit(data)"
                   class="bg-blue-600 hover:bg-blue-700 text-white py-1 px-2 rounded inline-flex items-center"
                 >
                   <svg
@@ -140,7 +130,7 @@
                 <button
                   type="button"
                   (click)="openModal('deleteConfirmModal')"
-                  (click)="onDelete(row)"
+                  (click)="onDelete(data)"
                   class="bg-red-600 hover:bg-red-700 ml-2 text-white py-1 px-2 rounded inline-flex items-center"
                 >
                   <svg
@@ -229,7 +219,7 @@
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
           <button
-            (click)="deleteDepartmentDetail(row.id)"
+            (click)="deleteDepartmentDetail(data)"
             type="button"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
@@ -251,7 +241,7 @@
 
 <jw-modal class="hidden" id="addDepartmentModal">
   <div
-    class="fixed z-10 inset-0 overflow-y-auto transition ease-in-out hover:-translate-y-1 hover:scale-110"
+    class="fixed z-10 inset-0 overflow-y-auto transition"
     aria-labelledby="modal-title"
     role="dialog"
     aria-modal="true"
@@ -269,24 +259,64 @@
         >&#8203;</span
       >
       <div
-        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:my-8 lg:max-w-lg md:max-w-md sm:max-w-sm w-full"
       >
         <form [formGroup]="formValue" class="mt-8 space-y-6 px-6">
           <input type="hidden" name="remember" value="true" />
           <div>
-            <label for="departmentName" class="sr-only">Departmentname</label>
+            <label for="name" class="sr-only">Name</label>
             <input
-              formControlName="departmentName"
+              formControlName="name"
               type="text"
-              autocomplete="departmentName"
+              autocomplete="name"
               required
               class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="departmentName"
+              placeholder="Name"
             />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['name'].dirty &&
+                formValue.hasError('required', 'name')
+              "
+              >Name is required</span
+            >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['name'].errors?.['minlength']"
+            >
+              Name must be at least 2 characters long.
+            </span>
+          </div>
+          <div>
+            <label for="description" class="sr-only">Description</label>
+            <input
+              formControlName="description"
+              type="text"
+              autocomplete="description"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Description"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['description'].dirty &&
+                formValue.hasError('required', 'description')
+              "
+              >Description is required</span
+            >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['description'].errors?.['minlength']"
+            >
+              Description must be at least 10 characters long.
+            </span>
           </div>
           <div>
             <button
               *ngIf="showAdd"
+              [disabled]="!formValue.valid"
               (click)="postDepartmentDetails()"
               type="button"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
@@ -295,7 +325,7 @@
             </button>
             <button
               *ngIf="showUpdate"
-              (click)="editDepartmentDetail()"
+              (click)="editDepartmentDetail(data.id)"
               type="button"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >

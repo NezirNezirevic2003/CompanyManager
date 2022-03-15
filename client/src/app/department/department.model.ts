@@ -1,4 +1,5 @@
 export class DepartmentModel {
-  Id: number = 0;
-  DepartmentName: string = '';
+  id: number = 0;
+  name: string = '';
+  description: string = '';
 }

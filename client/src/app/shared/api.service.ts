@@ -5,25 +5,22 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ApiService {
-  public departmentAPIUrl: string = 'https://localhost:44319/api/Department/';
-  public loginAPIUrl: string = 'https://companymanager-api.herokuapp.com/api/';
-  public employeeAPIUrl: string =
-    'https://companymanager-api.herokuapp.com/api/';
+  public departmentAPIUrl: string = 'http://localhost:5000/api/';
+  public loginAPIUrl: string = 'http://localhost:5000/api/';
+  public employeeAPIUrl: string = 'http://localhost:5000/api/';
   constructor(private _http: HttpClient) {}
 
   GetDepartments() {
-    return this._http
-      .get<any>(`${this.departmentAPIUrl}get_all_departments`)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this._http.get<any>(`${this.departmentAPIUrl}departments`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   PostDepartment(data: any) {
     return this._http
-      .post<any>(`${this.departmentAPIUrl}add_department`, data)
+      .post<any>(`${this.departmentAPIUrl}post_department`, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -31,9 +28,9 @@ export class ApiService {
       );
   }
 
-  UpdateDepartment(data: any) {
+  UpdateDepartment(data: any, id: any) {
     return this._http
-      .put<any>(`${this.departmentAPIUrl}update_department`, data)
+      .put<any>(`${this.departmentAPIUrl}update_department/${id}`, data)
       .pipe(
         map((res: any) => {
           return res;
