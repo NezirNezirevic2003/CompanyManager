@@ -5,9 +5,11 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ApiService {
-  public departmentAPIUrl: string = 'http://localhost:5000/api/';
-  public loginAPIUrl: string = 'http://localhost:5000/api/';
-  public employeeAPIUrl: string = 'http://localhost:5000/api/';
+  public departmentAPIUrl: string =
+    'https://companymanager-api.herokuapp.com/api/';
+  public loginAPIUrl: string = 'https://companymanager-api.herokuapp.com/api/';
+  public employeeAPIUrl: string =
+    'https://companymanager-api.herokuapp.com/api/';
   constructor(private _http: HttpClient) {}
 
   GetDepartments() {
