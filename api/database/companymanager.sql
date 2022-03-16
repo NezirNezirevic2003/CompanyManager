@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.7.1
+-- version 5.0.3
 -- https://www.phpmyadmin.net/
 --
--- Host: sql11.freesqldatabase.com
--- Gegenereerd op: 09 mrt 2022 om 13:54
--- Serverversie: 5.5.62-0ubuntu0.14.04.1
--- PHP-versie: 7.0.33-0ubuntu0.16.04.16
+-- Host: 127.0.0.1
+-- Gegenereerd op: 16 mrt 2022 om 10:05
+-- Serverversie: 10.4.14-MariaDB
+-- PHP-versie: 7.4.11
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `sql11477389`
+-- Database: `companymanager`
 --
 
 -- --------------------------------------------------------
@@ -39,11 +38,8 @@ CREATE TABLE `department` (
 --
 
 INSERT INTO `department` (`id`, `name`, `description`) VALUES
-(1, 'IT', 'test desc'),
-(2, 'test', 'hai'),
-(4, 'test2', 'ha2i'),
-(5, 'test222', 'ha2i222'),
-(7, 'test2', 'ha2i');
+(3, 'IT', 'Informatie en Technologie'),
+(4, 'Finance', 'Financiele zaken');
 
 -- --------------------------------------------------------
 
@@ -67,8 +63,11 @@ CREATE TABLE `employee` (
 --
 
 INSERT INTO `employee` (`id`, `firstname`, `lastname`, `email`, `dateOfJoining`, `status`, `salary`, `phonenumber`) VALUES
-(1, 'Hallo', 'Lelijkerd', 'nezirnezirevic310@gmail.com', '2022-03-16', 'other', '9000', '071234566'),
-(7, 'aada', 'dasads', 'nezirnezirevic31ss0@gmail.com', '2022-03-24', 'partime', '1234', '1234454');
+(1, 'Nezir', 'Nezirevic', 'nezirnezirevic310@gmail.com', '2022-02-01', 'internship', '1200', '0612345678'),
+(3, 'Mohammed', 'Samadov', 'samadov1@gmail.com', '2022-03-01', 'internship', '1000', '068654456'),
+(4, 'Nadir', 'md', 'nadi@gmail.com', '2022-03-19', 'internship', '2300', '061234567'),
+(5, 'Max', 'van Dongen', 'max@gmail.com', '2022-03-09', 'fulltime', '1200', '0612345678'),
+(7, 'Jim', 'van Vliet', '--_____', '2021-02-01', 'fulltime', '1200', '06541234568');
 
 -- --------------------------------------------------------
 
@@ -91,15 +90,16 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `username`, `email`, `password`, `phonenumber`) VALUES
-(1, 'undefined', 'nezir123', 'nezir123', 'nezirnezirevic310@gmail.com', '$2b$10$U7QD90i/NLRj5AWvG6k0Y.DAtct4Tw3aHuQKhXlhSiMCPHVdalU0u', '0612345678'),
-(2, 'undefined', 'nezir123', 'nezir123', '209646@edu.ozhw.nl', '$2b$10$WqpmX8kQis5aQdGd9YlakOTvvTCJqigM.SXsNMKojG4zxBAOEhBRO', '0612345678'),
-(3, 'undefined', 'nezir123', 'nezir123', 'admin@example.com', '$2b$10$rXdBg4uNZztW7PhSw03NjuvFmoxdRDwsuoy8qrctEQYbpHA0UUUU.', '0612345678'),
-(4, 'undefined', 'samadov', 'samadov', 'muhammadsamadov@gmail.com', '$2b$10$CYRpYYTPqHe9C.LqPaiyAev3sGxQV/ZmeOu8iKa7CJnsPTqeCLwAC', '0648555065'),
-(5, 'undefined', 'deeznuts', 'deeznuts', 'nokebol148@wodeda.com', '$2b$10$pPIOlkOikGgIG76BQNoO2OfF4NI1Mhg2RBJtPn3dzBZxorGa2JNfG', '3456546754667'),
-(6, 'undefined', 'samadov201', 'samadov201', 'samadov123@gmail.com', '$2b$10$0Y2Vx/..urGo9YKFKQnGwuctHsp/ueWzS6WDo7YJ.6yMuSx0xNNc2', '06123456789'),
-(7, 'undefined', 'adminn', 'adminn', 'a@b.caaaaaaaaa', '$2b$10$gsZv/KCj4gDTdZzJhxeUEO8bMK0LDSABFEBxIbbpuwGONnYZW1SRe', '12345678'),
-(9, 'Jan', 'Pieter', 'jp1200', 'jp@gmail.com', '$2b$10$kiKIKhjseycokUFop0QMw.MsWKecs0BxLm9VjdWVYq9SrMGIJ3F5S', '061267899'),
-(10, 'undefined', 'ricardo123', 'ricardo123', 'ricardo123@gmail.com', '$2b$10$WgUtOuCqE2b/3A4OFxv.Rux6B7lnX7attUZt7syFMZFzT00zj/fAS', '0612345678');
+(3, 'undefined', 'nezir123', 'nezir123', 'nezirnezirevic310@gmail.com', '$2b$10$.CRc2ZrcPytOJDkMZGynqe/dfhMc53ZPiURvy4YyhsKUu3okEddpG', '0612345678'),
+(4, 'undefined', 'nezir123', 'nezir123', 'admin@example.com', '$2b$10$KxAnaOgelzCyVpNWIDvyTO2LXBOPef4GFQmlPfzlwbk68JbcCYnLa', '06123456789'),
+(5, 'undefined', 'nezir123', 'nezir123', '209646@edu.ozhw.nl', '$2b$10$IjnByQZ4pD6fyjlZ/.6Uq.tFeeAkHKT54ZMgWRLE8BSZa1PHvOOjW', '0612345678'),
+(6, 'undefined', 'nezir123', 'nezir123', '2096496@edu.ozhw.nl', '$2b$10$AzwVkFJWQOMWUoXUUzpVm.MZURK6e46B3kI4./SeQq2oeYGsVqbQe', '061234567'),
+(7, 'undefined', 'nezir123', 'nezir123', 'klix@gmail.com', '$2b$10$CWbV9KtAAJGKw0TKEjskJOnDjvMbx.m9tSpH7FLgz6Dp7rWWyJTBO', '0612345678'),
+(8, 'undefined', 'nezir123', 'nezir123', '12@gmail.com', '$2b$10$oMKRN7m18UqZAbQskdqYpuu0/E5kOSFYFRmrWl8fv5e7cKvkGJ2AS', '0612345678'),
+(9, 'undefined', 'nezir123', 'nezir123', 'nezir123@gmail.com', '$2b$10$wZxLSLA3qdP0.lgYMGaUVOHuIbdoUdEK6W1Fxaf9c.SQAdnu086Qm', '062345678'),
+(10, 'undefined', 'nezir123', 'nezir123', '20911646@edu.ozhw.nl', '$2b$10$3NnBSF6gjpDF7c6rnPpOkeZQwvTsKNrfdPZYtPtEUSs25fWEB2I2a', '061245678'),
+(11, 'undefined', '123456', '123456', 'nezir1239@gmail.com', '$2b$10$MPRTLYlHIxxHNrtpeC3p.e0w6T7p4zf7GYug52QRcIJ13tvM8jWYG', '06123456789'),
+(12, 'undefined', 'nezir123', 'nezir123', '12111@gmail.com', '$2b$10$55LrPJUDpSMk3pKZH7ro..AUiNPjQ4MvU.x232bgx3iZbgxOttq6q', '06123456789');
 
 --
 -- Indexen voor geÃ«xporteerde tabellen
@@ -115,15 +115,13 @@ ALTER TABLE `department`
 -- Indexen voor tabel `employee`
 --
 ALTER TABLE `employee`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexen voor tabel `user`
 --
 ALTER TABLE `user`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `id_UNIQUE` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT voor geÃ«xporteerde tabellen
@@ -133,17 +131,20 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT voor een tabel `department`
 --
 ALTER TABLE `department`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
 --
 -- AUTO_INCREMENT voor een tabel `employee`
 --
 ALTER TABLE `employee`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT voor een tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;COMMIT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
