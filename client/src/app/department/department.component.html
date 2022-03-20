@@ -318,6 +318,7 @@
               *ngIf="showAdd"
               [disabled]="!formValue.valid"
               (click)="postDepartmentDetails()"
+              (click)="closeModal('addDepartmentModal')"
               type="button"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
             >
@@ -325,6 +326,7 @@
             </button>
             <button
               *ngIf="showUpdate"
+              (click)="closeModal('addDepartmentModal')"
               (click)="editDepartmentDetail(data.id)"
               type="button"
               class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
