@@ -15,6 +15,7 @@ import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { InterceptorService } from './loader/interceptor.service';
+import { ProjectsComponent } from './projects/projects.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { InterceptorService } from './loader/interceptor.service';
     SignupComponent,
     HeaderComponent,
     DashboardComponent,
+    ProjectsComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,15 +5,12 @@ import { map } from 'rxjs/operators';
   providedIn: 'root',
 })
 export class ApiService {
-  public departmentAPIUrl: string =
-    'https://companymanager-api.herokuapp.com/api/';
-  public loginAPIUrl: string = 'https://companymanager-api.herokuapp.com/api/';
-  public employeeAPIUrl: string =
-    'https://companymanager-api.herokuapp.com/api/';
+  public apiUrl: string = 'http://localhost:5000/api/';
+
   constructor(private _http: HttpClient) {}
 
   GetDepartments() {
-    return this._http.get<any>(`${this.departmentAPIUrl}departments`).pipe(
+    return this._http.get<any>(`${this.apiUrl}departments`).pipe(
       map((res: any) => {
         return res;
       })
@@ -21,18 +18,16 @@ export class ApiService {
   }
 
   PostDepartment(data: any) {
-    return this._http
-      .post<any>(`${this.departmentAPIUrl}post_department`, data)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this._http.post<any>(`${this.apiUrl}post_department`, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   UpdateDepartment(data: any, id: any) {
     return this._http
-      .put<any>(`${this.departmentAPIUrl}update_department/${id}`, data)
+      .put<any>(`${this.apiUrl}update_department/${id}`, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -41,37 +36,31 @@ export class ApiService {
   }
 
   DeleteDepartment(id: number) {
-    return this._http
-      .delete<any>(`${this.departmentAPIUrl}delete_department/` + id)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this._http.delete<any>(`${this.apiUrl}delete_department/` + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   PostEmployee(data: any) {
-    return this._http
-      .post<any>(`${this.employeeAPIUrl}employee_post`, data)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this._http.post<any>(`${this.apiUrl}employee_post`, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
   DeleteEmployee(id: number) {
-    return this._http
-      .delete<any>(`${this.employeeAPIUrl}delete_employee/` + id)
-      .pipe(
-        map((res: any) => {
-          return res;
-        })
-      );
+    return this._http.delete<any>(`${this.apiUrl}delete_employee/` + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
   }
 
   UpdateEmployee(data: any, id: any) {
     return this._http
-      .put<any>(`${this.employeeAPIUrl}update_employee/${id}`, data)
+      .put<any>(`${this.apiUrl}update_employee/${id}`, data)
       .pipe(
         map((res: any) => {
           return res;
@@ -80,7 +69,7 @@ export class ApiService {
   }
 
   GetEmployees() {
-    return this._http.get<any>(`${this.employeeAPIUrl}employees`).pipe(
+    return this._http.get<any>(`${this.apiUrl}employees`).pipe(
       map((res: any) => {
         return res;
       })
@@ -88,10 +77,10 @@ export class ApiService {
   }
 
   signUp(empObj: any) {
-    return this._http.post<any>(`${this.loginAPIUrl}signup`, empObj);
+    return this._http.post<any>(`${this.apiUrl}signup`, empObj);
   }
 
   login(empObj: any) {
-    return this._http.post<any>(`${this.loginAPIUrl}login`, empObj);
+    return this._http.post<any>(`${this.apiUrl}login`, empObj);
   }
 }

@@ -8,7 +8,6 @@ module.exports.employees = (req, res) => {
 
     if (result.length > 0) {
       res.send({
-        message: "User",
         data: result,
       });
     }
