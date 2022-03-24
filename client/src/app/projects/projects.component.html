@@ -17,6 +17,8 @@
 -->
 <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mt-5">
   <button
+    (click)="clickAddProject()"
+    (click)="openModal('addProjectModal')"
     type="submit"
     class="group relative mb-4 w-48 flex justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
   >
@@ -38,149 +40,213 @@
     </span>
     Add project
   </button>
+  <div class="flex start">
+    <div
+      class="flex border-2 rounded-md mb-4 lg:max-w-80 md:max-w-80 sm:max-w-sm w-full"
+    >
+      <input
+        name="firstname"
+        class="px-4 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 lg:max-w-80 md:max-w-80 sm:max-w-sm w-full"
+        placeholder="Search..."
+      />
+    </div>
+  </div>
   <div class="bg-white">
-    <div class="max-w-full py-20 sm:py-24 lg:max-w-7xl">
-      <h2 class="sr-only">Products</h2>
-
-      <div
-        class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 md:grid-cols-1 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
-      >
+    <div class="max-w-full lg:max-w-7xl">
+      <h2 class="sr-only">Projects</h2>
+      <div>
         <div
-          class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
+          class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 md:grid-cols-1 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
         >
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Websitekeizer</div>
-            <p class="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, nulla! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#photography</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#travel</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#winter</span
-            >
+          <div
+            *ngFor="let data of projectData"
+            class="shadow cursor-pointer hover:bg-gray-100 overflow-hidden border-b border-gray-200 sm:rounded-lg"
+          >
+            <div class="px-6 py-4">
+              <div class="font-bold text-xl mb-2">{{ data.name }}</div>
+              <p class="text-gray-700 text-base">
+                {{ data.description }}
+              </p>
+            </div>
+            <div class="px-6 pt-4 pb-2">
+              <span
+                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
+                >#{{ data.tag }}</span
+              >
+            </div>
           </div>
         </div>
-
-        <div
-          class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
-        >
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Webcaptain</div>
-            <p class="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, nulla! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#photography</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#travel</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#winter</span
-            >
-          </div>
-        </div>
-
-        <div
-          class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
-        >
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Pryces</div>
-            <p class="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, nulla! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#photography</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#travel</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#winter</span
-            >
-          </div>
-        </div>
-
-        <div
-          class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
-        >
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Speac</div>
-            <p class="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, nulla! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#photography</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#travel</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#winter</span
-            >
-          </div>
-        </div>
-        <div
-          class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg"
-        >
-          <div class="px-6 py-4">
-            <div class="font-bold text-xl mb-2">Seleqtive</div>
-            <p class="text-gray-700 text-base">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-              Voluptatibus quia, nulla! Maiores et perferendis eaque,
-              exercitationem praesentium nihil.
-            </p>
-          </div>
-          <div class="px-6 pt-4 pb-2">
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#photography</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#travel</span
-            >
-            <span
-              class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-              >#winter</span
-            >
-          </div>
-        </div>
-
-        <!-- More products... -->
       </div>
     </div>
   </div>
 </div>
+<jw-modal class="hidden" id="addProjectModal">
+  <div
+    class="fixed z-10 inset-0 overflow-y-auto transition"
+    aria-labelledby="modal-title"
+    role="dialog"
+    aria-modal="true"
+  >
+    <div
+      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
+    >
+      <div
+        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+        aria-hidden="true"
+      ></div>
+      <span
+        class="hidden sm:inline-block sm:align-middle sm:h-screen"
+        aria-hidden="true"
+        >&#8203;</span
+      >
+      <div
+        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:my-8 lg:max-w-lg md:max-w-md sm:max-w-sm w-full"
+      >
+        <form [formGroup]="formValue" class="mt-8 space-y-6 px-6">
+          <input type="hidden" name="remember" value="true" />
+          <div>
+            <label for="name" class="sr-only">Name</label>
+            <input
+              formControlName="name"
+              type="text"
+              autocomplete="name"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Name"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['name'].dirty &&
+                formValue.hasError('required', 'name')
+              "
+              >Name is required</span
+            >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['name'].errors?.['minlength']"
+            >
+              Firstname must be at least 2 characters long.
+            </span>
+          </div>
+          <div>
+            <label for="description" class="sr-only">Description</label>
+            <input
+              formControlName="description"
+              type="text"
+              autocomplete="description"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Description"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['description'].dirty &&
+                formValue.hasError('required', 'description')
+              "
+              >Description is required</span
+            >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['description'].errors?.['description']"
+            >
+              Description must be at least 2 characters long.
+            </span>
+          </div>
+          <div>
+            <label for="tag" class="sr-only">Tag</label>
+            <input
+              formControlName="tag"
+              type="text"
+              autocomplete="tag"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="#Tag"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['tag'].dirty &&
+                formValue.hasError('required', 'tag')
+              "
+              >Tag is required</span
+            >
+            <span
+              class="text-rose-600 text-sm"
+              *ngIf="formValue.controls['tag'].errors?.['tag']"
+            >
+              Tag must be at least 2 characters long.
+            </span>
+          </div>
+          <div>
+            <label for="status" class="sr-only">Status</label>
+            <input
+              formControlName="status"
+              type="text"
+              autocomplete="status"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Status"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['status'].dirty &&
+                formValue.hasError('required', 'status')
+              "
+              >Status is required</span
+            >
+          </div>
+          <div>
+            <label for="employees" class="sr-only">Employees</label>
+            <input
+              formControlName="employees"
+              type="text"
+              autocomplete="employees"
+              required
+              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+              placeholder="Employees"
+            />
+            <span
+              class="text-rose-600 mb-0 text-sm"
+              *ngIf="
+                formValue.controls['employees'].dirty &&
+                formValue.hasError('required', 'employees')
+              "
+              >Employees is required</span
+            >
+          </div>
+          <div>
+            <button
+              *ngIf="showAdd"
+              (click)="postProject()"
+              (click)="closeModal('addProjectModal')"
+              type="button"
+              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Add
+            </button>
+            <button
+              [disabled]="!formValue.valid"
+              *ngIf="showUpdate"
+              (click)="closeModal('addProjectModal')"
+              type="button"
+              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Update
+            </button>
+            <button
+              (click)="closeModal('addProjectModal')"
+              id="closeButton"
+              type="button"
+              class="mt-3 mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</jw-modal>

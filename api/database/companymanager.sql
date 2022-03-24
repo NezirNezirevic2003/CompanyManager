@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 16 mrt 2022 om 10:05
+-- Gegenereerd op: 24 mrt 2022 om 11:51
 -- Serverversie: 10.4.14-MariaDB
 -- PHP-versie: 7.4.11
 
@@ -34,7 +34,7 @@ CREATE TABLE `department` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Gegevens worden geÃ«xporteerd voor tabel `department`
+-- Gegevens worden geëxporteerd voor tabel `department`
 --
 
 INSERT INTO `department` (`id`, `name`, `description`) VALUES
@@ -59,7 +59,7 @@ CREATE TABLE `employee` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Gegevens worden geÃ«xporteerd voor tabel `employee`
+-- Gegevens worden geëxporteerd voor tabel `employee`
 --
 
 INSERT INTO `employee` (`id`, `firstname`, `lastname`, `email`, `dateOfJoining`, `status`, `salary`, `phonenumber`) VALUES
@@ -68,6 +68,30 @@ INSERT INTO `employee` (`id`, `firstname`, `lastname`, `email`, `dateOfJoining`,
 (4, 'Nadir', 'md', 'nadi@gmail.com', '2022-03-19', 'internship', '2300', '061234567'),
 (5, 'Max', 'van Dongen', 'max@gmail.com', '2022-03-09', 'fulltime', '1200', '0612345678'),
 (7, 'Jim', 'van Vliet', '--_____', '2021-02-01', 'fulltime', '1200', '06541234568');
+
+-- --------------------------------------------------------
+
+--
+-- Tabelstructuur voor tabel `project`
+--
+
+CREATE TABLE `project` (
+  `id` int(11) NOT NULL,
+  `name` varchar(30) NOT NULL,
+  `description` varchar(60) NOT NULL,
+  `tag` varchar(20) NOT NULL,
+  `status` varchar(20) NOT NULL,
+  `employees` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Gegevens worden geëxporteerd voor tabel `project`
+--
+
+INSERT INTO `project` (`id`, `name`, `description`, `tag`, `status`, `employees`) VALUES
+(1, 'Websitekeizer', 'Presenteer uw bedrijf op een professionele manier', 'web', 'active', '_'),
+(2, 'Webcaptain', 'Presenteer uw bedrijf op een professionele manier', 'web-development', 'active', '_'),
+(3, 'Pryces', 'Contractportaal voor Energie en Telecom!', 'web', 'active', '_');
 
 -- --------------------------------------------------------
 
@@ -86,11 +110,11 @@ CREATE TABLE `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Gegevens worden geÃ«xporteerd voor tabel `user`
+-- Gegevens worden geëxporteerd voor tabel `user`
 --
 
 INSERT INTO `user` (`id`, `firstname`, `lastname`, `username`, `email`, `password`, `phonenumber`) VALUES
-(3, 'undefined', 'nezir123', 'nezir123', 'nezirnezirevic310@gmail.com', '$2b$10$.CRc2ZrcPytOJDkMZGynqe/dfhMc53ZPiURvy4YyhsKUu3okEddpG', '0612345678'),
+(3, 'undefinedcd', 'nezir123', 'nezir123', 'nezirnezirevic310@gmail.com', '$2b$10$.CRc2ZrcPytOJDkMZGynqe/dfhMc53ZPiURvy4YyhsKUu3okEddpG', '0612345678'),
 (4, 'undefined', 'nezir123', 'nezir123', 'admin@example.com', '$2b$10$KxAnaOgelzCyVpNWIDvyTO2LXBOPef4GFQmlPfzlwbk68JbcCYnLa', '06123456789'),
 (5, 'undefined', 'nezir123', 'nezir123', '209646@edu.ozhw.nl', '$2b$10$IjnByQZ4pD6fyjlZ/.6Uq.tFeeAkHKT54ZMgWRLE8BSZa1PHvOOjW', '0612345678'),
 (6, 'undefined', 'nezir123', 'nezir123', '2096496@edu.ozhw.nl', '$2b$10$AzwVkFJWQOMWUoXUUzpVm.MZURK6e46B3kI4./SeQq2oeYGsVqbQe', '061234567'),
@@ -102,7 +126,7 @@ INSERT INTO `user` (`id`, `firstname`, `lastname`, `username`, `email`, `passwor
 (12, 'undefined', 'nezir123', 'nezir123', '12111@gmail.com', '$2b$10$55LrPJUDpSMk3pKZH7ro..AUiNPjQ4MvU.x232bgx3iZbgxOttq6q', '06123456789');
 
 --
--- Indexen voor geÃ«xporteerde tabellen
+-- Indexen voor geëxporteerde tabellen
 --
 
 --
@@ -118,13 +142,19 @@ ALTER TABLE `employee`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexen voor tabel `project`
+--
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexen voor tabel `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT voor geÃ«xporteerde tabellen
+-- AUTO_INCREMENT voor geëxporteerde tabellen
 --
 
 --
@@ -137,7 +167,13 @@ ALTER TABLE `department`
 -- AUTO_INCREMENT voor een tabel `employee`
 --
 ALTER TABLE `employee`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT voor een tabel `project`
+--
+ALTER TABLE `project`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT voor een tabel `user`

@@ -7,11 +7,21 @@ app.use(cors());
 
 const db = require("./config/dbConfig");
 
-db.connect((err) => {
-  err
-    ? console.log("db connecion failed")
-    : console.log("db connection succesful");
-});
+// db.connect((err) => {
+//   err
+//     ? console.log("db connecion failed")
+//     : console.log("db connection succesful");
+// });
+
+const databaseConnection = () => {
+  try {
+    db.connect();
+    console.log("Database connected");
+  } catch (error) {
+    console.log("Database connection failed");
+  }
+};
+databaseConnection();
 
 const routes = require("./routes/router.js");
 app.use(bodyparser.json());

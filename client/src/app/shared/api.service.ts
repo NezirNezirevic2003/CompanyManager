@@ -9,6 +9,22 @@ export class ApiService {
 
   constructor(private _http: HttpClient) {}
 
+  GetProjects() {
+    return this._http.get<any>(`${this.apiUrl}projects`).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
+  PostProject(data: any) {
+    return this._http.post<any>(`${this.apiUrl}project_post`, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
   GetDepartments() {
     return this._http.get<any>(`${this.apiUrl}departments`).pipe(
       map((res: any) => {
