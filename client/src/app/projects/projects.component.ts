@@ -35,7 +35,6 @@ export class ProjectsComponent implements OnInit {
   getProjectDetails() {
     this.api.GetProjects().subscribe((res) => {
       this.projectData = res.data;
-      console.log(this.projectData);
     });
   }
 
@@ -46,7 +45,6 @@ export class ProjectsComponent implements OnInit {
     this.projectObj.status = this.formValue.value.status;
     this.projectObj.employees = this.formValue.value.employees;
     this.api.PostProject(this.projectObj).subscribe((res) => {
-      console.log(res);
       var showAddSuccess = document.getElementById('success-alert');
       if (showAddSuccess) {
         showAddSuccess.style.display = 'block';
@@ -58,6 +56,17 @@ export class ProjectsComponent implements OnInit {
       }, 4000);
       this.getProjectDetails();
     });
+  }
+
+  onEdit(data: any) {
+    this.projectObj.id = data.id;
+    this.formValue.controls['name'].setValue(data.name);
+    this.formValue.controls['description'].setValue(data.description);
+    this.formValue.controls['tag'].setValue(data.tag);
+    this.formValue.controls['status'].setValue(data.status);
+    this.formValue.controls['employees'].setValue(data.employees);
+    this.showUpdate = true;
+    this.showAdd = false;
   }
 
   openModal(id: string) {

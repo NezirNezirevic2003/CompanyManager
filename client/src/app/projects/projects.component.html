@@ -59,6 +59,8 @@
           class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 md:grid-cols-1 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
         >
           <div
+            (click)="openModal('addProjectModal')"
+            (click)="onEdit(data)"
             *ngFor="let data of projectData"
             class="shadow cursor-pointer hover:bg-gray-100 overflow-hidden border-b border-gray-200 sm:rounded-lg"
           >
@@ -151,7 +153,7 @@
               class="text-rose-600 text-sm"
               *ngIf="formValue.controls['description'].errors?.['description']"
             >
-              Description must be at least 2 characters long.
+              Description must be at least 10 characters long.
             </span>
           </div>
           <div>

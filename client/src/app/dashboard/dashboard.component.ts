@@ -11,25 +11,31 @@ export class DashboardComponent implements OnInit {
 
   employeeData: any = [];
   departmentData: any = [];
+  projectData: any = [];
   username: any = [];
 
   ngOnInit(): void {
     this.getEmployeeDetails();
     this.getDepartmentDetails();
+    this.getProjectDetails();
     this.username = localStorage.getItem('username');
   }
 
   getEmployeeDetails() {
     this.api.GetEmployees().subscribe((res) => {
       this.employeeData = res.data.length;
-      console.log(this.employeeData);
     });
   }
 
   getDepartmentDetails() {
     this.api.GetDepartments().subscribe((res) => {
       this.departmentData = res.data.length;
-      console.log(this.departmentData);
+    });
+  }
+
+  getProjectDetails() {
+    this.api.GetProjects().subscribe((res) => {
+      this.projectData = res.data.length;
     });
   }
 }

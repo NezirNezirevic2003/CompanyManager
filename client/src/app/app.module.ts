@@ -9,13 +9,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeeComponent } from './employee/employee.component';
 import { DepartmentComponent } from './department/department.component';
 import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HeaderComponent } from './header/header.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { InterceptorService } from './loader/interceptor.service';
 import { ProjectsComponent } from './projects/projects.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,10 +23,10 @@ import { ProjectsComponent } from './projects/projects.component';
     EmployeeComponent,
     DepartmentComponent,
     LoginComponent,
-    SignupComponent,
     HeaderComponent,
     DashboardComponent,
     ProjectsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,

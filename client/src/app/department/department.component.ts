@@ -49,7 +49,6 @@ export class DepartmentComponent implements OnInit {
     this.departmentObj.name = this.formValue.value.name;
     this.departmentObj.description = this.formValue.value.description;
     this.api.PostDepartment(this.departmentObj).subscribe((res) => {
-      console.log(res);
       let ref = document.getElementById('closeButton');
       ref?.click();
       var showAddSuccess = document.getElementById('success-alert');
@@ -92,7 +91,6 @@ export class DepartmentComponent implements OnInit {
   getDepartmentDetails() {
     this.api.GetDepartments().subscribe((res) => {
       this.departmentData = res.data;
-      console.log(this.departmentData);
     });
   }
 
