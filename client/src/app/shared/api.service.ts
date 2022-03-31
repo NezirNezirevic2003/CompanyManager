@@ -25,6 +25,14 @@ export class ApiService {
     );
   }
 
+  UpdateProject(data: any, id: any) {
+    return this._http.put<any>(`${this.apiUrl}update_project/${id}`, data).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
   GetDepartments() {
     return this._http.get<any>(`${this.apiUrl}departments`).pipe(
       map((res: any) => {

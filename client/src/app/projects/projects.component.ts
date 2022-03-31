@@ -15,6 +15,7 @@ export class ProjectsComponent implements OnInit {
   showAdd!: boolean;
   showUpdate!: boolean;
   projectObj: ProjectModel = new ProjectModel();
+  data: any = [];
   constructor(
     private api: ApiService,
     private formBuilder: FormBuilder,
@@ -56,6 +57,19 @@ export class ProjectsComponent implements OnInit {
       }, 4000);
       this.getProjectDetails();
     });
+  }
+
+  editProjectDetail(id: any) {
+    this.projectObj.name = this.formValue.value.name;
+    this.projectObj.description = this.formValue.value.description;
+    this.projectObj.tag = this.formValue.value.tag;
+    this.projectObj.status = this.formValue.value.status;
+    this.projectObj.employees = this.formValue.value.employees;
+    this.api
+      .UpdateProject(this.projectObj, this.projectObj.id)
+      .subscribe((res) => {
+        this.getProjectDetails();
+      });
   }
 
   onEdit(data: any) {
