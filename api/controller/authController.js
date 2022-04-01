@@ -24,8 +24,7 @@ module.exports.signup = async (req, res) => {
 
     console.log(result.length, "check email id");
     if (result.length > 0) {
-      res.send({
-        status: false,
+      res.status(409).send({
         message: "Email already exists",
       });
     } else {
@@ -35,8 +34,7 @@ module.exports.signup = async (req, res) => {
       db.query(insertquery, async (err, result) => {
         if (err) throw err;
         if (result) {
-          res.send({
-            status: true,
+          res.status(200).send({
             message: "Registration successful",
           });
         }

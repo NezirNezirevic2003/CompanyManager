@@ -28,17 +28,15 @@ module.exports.employee_post = (req, res) => {
     if (err) throw err;
 
     if (result.length > 0) {
-      res.send({
-        status: false,
-        message: "Email already exists",
+      res.status(409).send({
+        error: "Email already exists",
       });
     } else {
       let insertEmployeeQuery = `INSERT into employee(firstname, lastname, email, dateOfJoining, status, salary, phonenumber) VALUES('${firstname}', '${lastname}', '${email}', '${dateOfJoining}', '${status}', '${salary}', '${phonenumber}')`;
       db.query(insertEmployeeQuery, (err, result) => {
         if (err) throw err;
         if (result) {
-          res.send({
-            status: true,
+          res.status(200).send({
             message: "Employee added successfully",
           });
         }
@@ -65,8 +63,7 @@ module.exports.employee_update = (req, res) => {
     console.log(result);
 
     if (result) {
-      res.send({
-        status: true,
+      res.status(200).send({
         message: "Employee was updated succesfully",
       });
     }
@@ -83,8 +80,7 @@ module.exports.delete_employee = (req, res) => {
     console.log(result);
 
     if (result) {
-      res.send({
-        status: true,
+      res.status(200).send({
         message: "Employee was deleted succesfully",
       });
     }

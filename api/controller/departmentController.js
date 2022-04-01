@@ -28,7 +28,7 @@ module.exports.post_department = (req, res) => {
       });
     } else {
       res.status(400).send({
-        message: "Something went wrong",
+        error: "Something went wrong",
       });
     }
   });
@@ -48,7 +48,7 @@ module.exports.update_department = (req, res) => {
       });
     } else {
       res.status(400).send({
-        message: "Something went wrong",
+        error: "Something went wrong",
       });
     }
   });

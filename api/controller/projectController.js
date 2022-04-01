@@ -22,13 +22,23 @@ module.exports.project_post = (req, res) => {
   const employees = req.body.employees;
 
   let insertProjectQuery = `INSERT into project(name, description, tag, status, employees ) VALUES('${name}', '${description}', '${tag}', '${status}', '${employees}')`;
+  let checkProjectName = `SELECT name FROM project WHERE name = '${name}' `;
 
-  db.query(insertProjectQuery, (err, result) => {
+  db.query(checkProjectName, (err, result) => {
     if (err) throw err;
 
-    if (result) {
-      res.status(200).send({
-        data: result,
+    if (result.length > 0) {
+      res.status(409).send({
+        error: "Name already exists",
+      });
+    } else {
+      db.query(insertProjectQuery, (err, result) => {
+        if (err) throw err;
+        if (result) {
+          res.status(200).send({
+            message: "Project added successfully",
+          });
+        }
       });
     }
   });
@@ -48,8 +58,7 @@ module.exports.project_update = (req, res) => {
     console.log(result);
 
     if (result) {
-      res.send({
-        status: true,
+      res.status(200).send({
         message: "Project was updated succesfully",
       });
     }
