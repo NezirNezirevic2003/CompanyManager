@@ -12,6 +12,7 @@ import { ProjectModel } from './project.model';
 export class ProjectsComponent implements OnInit {
   formValue!: FormGroup;
   projectData: any = [];
+  name: any;
   showAdd!: boolean;
   showUpdate!: boolean;
   projectObj: ProjectModel = new ProjectModel();
@@ -83,6 +84,18 @@ export class ProjectsComponent implements OnInit {
     this.showAdd = false;
   }
 
+  deleteProjectDetail(data: any) {
+    this.api.DeleteProject(this.projectObj.id).subscribe((res) => {
+      let ref = document.getElementById('deleteProjectButton');
+      ref?.click();
+      this.getProjectDetails();
+    });
+  }
+
+  onDelete(data: any) {
+    this.projectObj.id = data.id;
+  }
+
   openModal(id: string) {
     this.modalService.open(id);
   }
@@ -95,5 +108,19 @@ export class ProjectsComponent implements OnInit {
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
+  }
+
+  Search() {
+    if (this.name == '') {
+      this.ngOnInit();
+    } else {
+      this.projectData = this.projectData.filter(
+        (res: { name: any }) => {
+          return res.name
+            .toLocaleLowerCase()
+            .match(this.name.toLocaleLowerCase());
+        }
+      );
+    }
   }
 }

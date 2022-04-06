@@ -10,6 +10,8 @@ import { EmployeeModel } from './employee.model';
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
+  employeeSuccessMessage: any = [];
+  employeeErrorMessage: any = [];
   firstname: any;
   formValue!: FormGroup;
   employeeData: any = [];
@@ -56,6 +58,13 @@ export class EmployeeComponent implements OnInit {
     this.employeeObj.salary = this.formValue.value.salary;
     this.employeeObj.phonenumber = this.formValue.value.phonenumber;
     this.api.PostEmployee(this.employeeObj).subscribe((res) => {
+      if (res.error) {
+        var errorAlert = document.getElementById('errorAlert');
+        if (errorAlert) {
+          errorAlert.style.display = 'block';
+        }
+      }
+      this.employeeSuccessMessage = res.message;
       var showAddSuccess = document.getElementById('success-alert');
       if (showAddSuccess) {
         showAddSuccess.style.display = 'block';

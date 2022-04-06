@@ -4,7 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepartmentComponent } from './department/department.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { LoginComponent } from './login/login.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+// import { NotFoundComponent } from './not-found/not-found.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { AuthGuard } from './shared/auth.guard';
 
@@ -30,7 +30,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', component: LoginComponent, pathMatch: 'full' },
-  { path: '**', component: NotFoundComponent },
+  // { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({

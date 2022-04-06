@@ -64,3 +64,20 @@ module.exports.project_update = (req, res) => {
     }
   });
 };
+
+module.exports.project_delete = (req,res) => {
+  const id = req.params.id;
+
+  let deleteProjectQuery = `DELETE from project WHERE id = '${id}'`;
+
+  db.query(deleteProjectQuery, (err, result) => {
+    if (err) throw err;
+    console.log(result);
+
+    if (result) {
+      res.status(200).send({
+        message: "Project was deleted succesfully",
+      });
+    }
+  });
+}

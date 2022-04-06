@@ -19,5 +19,6 @@ router.delete("/delete_department/:id", departmentController.delete_department);
 router.get("/projects", projectController.projects);
 router.post("/project_post", projectController.project_post);
 router.put("/update_project/:id", projectController.project_update);
+router.delete("/delete_project/:id", projectController.project_delete);
 
 module.exports = router;

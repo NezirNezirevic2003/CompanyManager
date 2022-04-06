@@ -33,6 +33,14 @@ export class ApiService {
     );
   }
 
+  DeleteProject(id: number) {
+    return this._http.delete<any>(`${this.apiUrl}delete_project/` + id).pipe(
+      map((res: any) => {
+        return res;
+      })
+    );
+  }
+
   GetDepartments() {
     return this._http.get<any>(`${this.apiUrl}departments`).pipe(
       map((res: any) => {
