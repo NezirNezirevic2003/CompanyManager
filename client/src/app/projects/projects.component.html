@@ -322,7 +322,6 @@
               Add
             </button>
             <button
-              [disabled]="!formValue.valid"
               *ngIf="showUpdate"
               (click)="closeModal('addProjectModal')"
               (click)="editProjectDetail(data.id)"
