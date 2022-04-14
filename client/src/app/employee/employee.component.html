@@ -122,8 +122,10 @@
           </thead>
           <tbody class="bg-white divide-y">
             <tr
-              class="hover:bg-gray-100 divide-gray-200"
+              class="hover:bg-gray-100 divide-gray-200 cursor-pointer"
               *ngFor="let data of employeeData"
+              (click)="openModal('addEmployeeModal')"
+              (click)="onEdit(data)"
             >
               <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">

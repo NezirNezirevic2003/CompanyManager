@@ -7,17 +7,22 @@ import { ModalService } from '../_modal';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  // Modalservice constructor
   constructor(private modalService: ModalService) {}
+  // Gebruikersnaamtype
   username: any = [];
 
+  // Eerste paginaload
   ngOnInit(): void {
     this.username = localStorage.getItem('username');
   }
 
+  // Open modal functie
   openModal(id: string) {
     this.modalService.open(id);
   }
 
+  // open menu functie
   openMenu() {
     var mobileButton = document.getElementById('mobileButton');
     var menu = document.getElementById('mobile-menu');
@@ -29,6 +34,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // Open profielfunctie modal
   openProfile() {
     var profileButton = document.getElementById('profileButton');
     var profileMenu = document.getElementById('profileMenu');
@@ -37,6 +43,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // Menu dischtdoen functie
   closeMenu() {
     var mobileButton = document.getElementById('mobileButton');
     var menu = document.getElementById('mobile-menu');
@@ -48,6 +55,7 @@ export class HeaderComponent implements OnInit {
     }
   }
 
+  // Modal dichtdoen
   closeModal(id: string) {
     this.modalService.close(id);
   }

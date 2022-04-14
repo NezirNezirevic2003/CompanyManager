@@ -10,6 +10,7 @@ import { EmployeeModel } from './employee.model';
   styleUrls: ['./employee.component.css'],
 })
 export class EmployeeComponent implements OnInit {
+  // Alle employee types doorgeven
   employeeSuccessMessage: any = [];
   employeeErrorMessage: any = [];
   firstname: any;
@@ -19,9 +20,6 @@ export class EmployeeComponent implements OnInit {
   showAdd!: boolean;
   showUpdate!: boolean;
   data: any = [];
-  @Input() receive!: string;
-  @Input() mobileSpecification!: any;
-  role: string = '';
   EmployeeNameFilter: string = '';
   EmployeeListWithoutFilter: any = [];
   constructor(
@@ -30,6 +28,7 @@ export class EmployeeComponent implements OnInit {
     private modalService: ModalService
   ) {}
 
+  // De eerste paginalading voor alle employees en de standaardwaarde van de
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       firstname: ['', [Validators.required, Validators.minLength(2)]],
@@ -43,12 +42,14 @@ export class EmployeeComponent implements OnInit {
     this.getEmployeeDetails();
   }
 
+  // Klikfunctie voor het toevoegen van de employee
   clickAddEmployee() {
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
   }
 
+  // Post employee functie die alle gegevens stuurt naar de database
   postEmployeeDetails() {
     this.employeeObj.firstname = this.formValue.value.firstname;
     this.employeeObj.lastname = this.formValue.value.lastname;
@@ -78,12 +79,14 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
+  // Alle employeedetails verkrijgen uit de database
   getEmployeeDetails() {
     this.api.GetEmployees().subscribe((res) => {
       this.employeeData = res.data;
     });
   }
 
+  // Alle geselecteerde en veranderde gegevens bijwerken in
   editEmployeeDetail(id: any) {
     this.employeeObj.firstname = this.formValue.value.firstname;
     this.employeeObj.lastname = this.formValue.value.lastname;
@@ -96,11 +99,10 @@ export class EmployeeComponent implements OnInit {
       .UpdateEmployee(this.employeeObj, this.employeeObj.id)
       .subscribe((res) => {
         this.getEmployeeDetails();
-        // let button = document.getElementById('closeButton');
-        // button?.click();
       });
   }
 
+  // Bijwerkfunctie die een rij selecteert die bijgewerkt moet worden
   onEdit(data: any) {
     this.employeeObj.id = data.id;
     this.formValue.controls['firstname'].setValue(data.firstname);
@@ -114,6 +116,7 @@ export class EmployeeComponent implements OnInit {
     this.showAdd = false;
   }
 
+  // Verwijder employee functie
   deleteEmployeeDetail(data: any) {
     this.api.DeleteEmployee(this.employeeObj.id).subscribe((res) => {
       let ref = document.getElementById('deleteEmployeeButton');
@@ -122,18 +125,22 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
+  // De id van de geselecteerde rij gaat verwijderd worden
   onDelete(data: any) {
     this.employeeObj.id = data.id;
   }
 
+  // Open modal functie
   openModal(id: string) {
     this.modalService.open(id);
   }
 
+  // Sluitmodal functie
   closeModal(id: string) {
     this.modalService.close(id);
   }
 
+  // Zoekfunctie voor de voornaam van de werknemers
   Search() {
     if (this.firstname == '') {
       this.ngOnInit();

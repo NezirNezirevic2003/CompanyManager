@@ -10,6 +10,7 @@ import { UserModel } from '../shared/model/user.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  // Publieke types voor de Login component
   public loginForm!: FormGroup;
   public loginObj = new UserModel();
   constructor(
@@ -18,6 +19,7 @@ export class LoginComponent implements OnInit {
     private api: ApiService
   ) {}
 
+  // Op de paginalading wordt de formulier standaardwaarde vastgesteld en de localstorage schoongemaakt
   ngOnInit(): void {
     this.loginForm = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(6)]],
@@ -26,6 +28,7 @@ export class LoginComponent implements OnInit {
     localStorage.clear();
   }
 
+  // Login functie die je laat inloggen
   login() {
     this.loginObj.username = this.loginForm.value.username;
     this.loginObj.password = this.loginForm.value.password;

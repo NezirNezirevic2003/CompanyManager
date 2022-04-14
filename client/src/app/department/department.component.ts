@@ -10,6 +10,7 @@ import { DepartmentModel } from './department.model';
   styleUrls: ['./department.component.css'],
 })
 export class DepartmentComponent implements OnInit {
+  // Alle Department types benoemen
   name: any;
   formValue!: FormGroup;
   departmentData: any = [];
@@ -17,12 +18,15 @@ export class DepartmentComponent implements OnInit {
   showAdd!: boolean;
   showUpdate!: boolean;
   data: any = [];
+
+  // Alle constructors benoemen voor dit component
   constructor(
     private api: ApiService,
     private modalService: ModalService,
     private formBuilder: FormBuilder
   ) {}
 
+  // Alle departments worden geladen op de pagina load en de standaard formulier waarde wordt ingesteld
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -31,12 +35,14 @@ export class DepartmentComponent implements OnInit {
     this.getDepartmentDetails();
   }
 
+  // Klikfunctie voor het toevoegen voor van de department
   clickAddDepartment() {
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
   }
 
+  // Klikmethode voor het selecteren vaan een rij van data
   onEdit(data: any) {
     this.departmentObj.id = data.id;
     this.formValue.controls['name'].setValue(data.name);
@@ -45,6 +51,7 @@ export class DepartmentComponent implements OnInit {
     this.showAdd = false;
   }
 
+  // Een post functie die alle gegevens naar de database stuurt
   postDepartmentDetails() {
     this.departmentObj.name = this.formValue.value.name;
     this.departmentObj.description = this.formValue.value.description;
@@ -64,6 +71,7 @@ export class DepartmentComponent implements OnInit {
     });
   }
 
+  // Bijwerkfunctie die alle gegevens bijwerkt en naar de database verstuurt
   editDepartmentDetail(id: any) {
     this.departmentObj.name = this.formValue.value.name;
     this.departmentObj.description = this.formValue.value.description;
@@ -76,6 +84,7 @@ export class DepartmentComponent implements OnInit {
       });
   }
 
+  // Verwijderfunctie die de department verwijdert uit de database
   deleteDepartmentDetail(data: any) {
     this.api.DeleteDepartment(this.departmentObj.id).subscribe((res) => {
       let ref = document.getElementById('deleteDepartmentButton');
@@ -84,24 +93,29 @@ export class DepartmentComponent implements OnInit {
     });
   }
 
+  // Verwijderfunctie die de rij selecteert die verwijdert gaat worden
   onDelete(data: any) {
     this.departmentObj.id = data.id;
   }
 
+  // Alle departments uit de database verkrijgen
   getDepartmentDetails() {
     this.api.GetDepartments().subscribe((res) => {
       this.departmentData = res.data;
     });
   }
 
+  // Open modal functie
   openModal(id: string) {
     this.modalService.open(id);
   }
 
+  // Sluit de modal functie
   closeModal(id: string) {
     this.modalService.close(id);
   }
 
+  // Zoekfunctie die alle departmentnamen filtreert
   Search() {
     if (this.name == '') {
       this.ngOnInit();

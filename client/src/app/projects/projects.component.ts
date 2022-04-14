@@ -10,6 +10,7 @@ import { ProjectModel } from './project.model';
   styleUrls: ['./projects.component.css'],
 })
 export class ProjectsComponent implements OnInit {
+  // Alle types van de Project component opnoemen
   formValue!: FormGroup;
   projectData: any = [];
   name: any;
@@ -17,12 +18,15 @@ export class ProjectsComponent implements OnInit {
   showUpdate!: boolean;
   projectObj: ProjectModel = new ProjectModel();
   data: any = [];
+
+  // Een constructor benoemen met hun private parameters
   constructor(
     private api: ApiService,
     private formBuilder: FormBuilder,
     private modalService: ModalService
   ) {}
 
+  // Alle projecten worden geladen met de eerste pageload
   ngOnInit(): void {
     this.formValue = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -34,12 +38,14 @@ export class ProjectsComponent implements OnInit {
     this.getProjectDetails();
   }
 
+  // Alle gegevens uit de database halen
   getProjectDetails() {
     this.api.GetProjects().subscribe((res) => {
       this.projectData = res.data;
     });
   }
 
+  // Project wordt verzonden naar de database met alle
   postProject() {
     this.projectObj.name = this.formValue.value.name;
     this.projectObj.description = this.formValue.value.description;
@@ -60,6 +66,7 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  // project bewerken en selecteren
   editProjectDetail(id: any) {
     this.projectObj.name = this.formValue.value.name;
     this.projectObj.description = this.formValue.value.description;
@@ -73,6 +80,7 @@ export class ProjectsComponent implements OnInit {
       });
   }
 
+  // Specifieke rij van de project selecteren
   onEdit(data: any) {
     this.projectObj.id = data.id;
     this.formValue.controls['name'].setValue(data.name);
@@ -84,6 +92,7 @@ export class ProjectsComponent implements OnInit {
     this.showAdd = false;
   }
 
+  // De verwijderfunctie die alle gegevens van het project verwijdert
   deleteProjectDetail(data: any) {
     this.api.DeleteProject(this.projectObj.id).subscribe((res) => {
       let ref = document.getElementById('deleteProjectButton');
@@ -92,35 +101,38 @@ export class ProjectsComponent implements OnInit {
     });
   }
 
+  // Deze functie zorgt ervoor dat de project id geselecteerd wordt
   onDelete(data: any) {
     this.projectObj.id = data.id;
   }
 
+  // Fuctie om de modal open te doen
   openModal(id: string) {
     this.modalService.open(id);
   }
 
+  // Modal sluiten
   closeModal(id: string) {
     this.modalService.close(id);
   }
 
+  // Project toevoegen
   clickAddProject() {
     this.formValue.reset();
     this.showAdd = true;
     this.showUpdate = false;
   }
 
+  // Zoekfunctie die projectnamen doorzoekt
   Search() {
     if (this.name == '') {
       this.ngOnInit();
     } else {
-      this.projectData = this.projectData.filter(
-        (res: { name: any }) => {
-          return res.name
-            .toLocaleLowerCase()
-            .match(this.name.toLocaleLowerCase());
-        }
-      );
+      this.projectData = this.projectData.filter((res: { name: any }) => {
+        return res.name
+          .toLocaleLowerCase()
+          .match(this.name.toLocaleLowerCase());
+      });
     }
   }
 }
