@@ -10,6 +10,15 @@ import { ProjectModel } from './project.model';
   styleUrls: ['./projects.component.css'],
 })
 export class ProjectsComponent implements OnInit {
+  addModal: boolean = true;
+  deleteConfirmModal: boolean = true;
+  modalBtn() {
+    this.addModal = !this.addModal;
+  }
+  deleteBtn() {
+    this.deleteConfirmModal = !this.deleteConfirmModal;
+  }
+  dropDownList: any;
   // Alle types van de Project component opnoemen
   formValue!: FormGroup;
   projectData: any = [];

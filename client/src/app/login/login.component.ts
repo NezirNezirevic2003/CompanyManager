@@ -10,6 +10,10 @@ import { UserModel } from '../shared/model/user.model';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
+  pass: boolean = false;
+  clickEvent() {
+    this.pass = !this.pass;
+  }
   // Publieke types voor de Login component
   public loginForm!: FormGroup;
   public loginObj = new UserModel();

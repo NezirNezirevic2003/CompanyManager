@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CalenderComponent } from './calender/calender.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DepartmentComponent } from './department/department.component';
 import { EmployeeComponent } from './employee/employee.component';
@@ -27,6 +28,11 @@ const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'calender',
+    component: CalenderComponent,
     canActivate: [AuthGuard],
   },
   { path: '', component: LoginComponent, pathMatch: 'full' },

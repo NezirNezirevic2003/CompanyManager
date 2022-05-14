@@ -16,6 +16,7 @@ import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { InterceptorService } from './loader/interceptor.service';
 import { ProjectsComponent } from './projects/projects.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { TasksComponent } from './tasks/tasks.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     DashboardComponent,
     ProjectsComponent,
     NotFoundComponent,
+    TasksComponent,
   ],
   imports: [
     BrowserModule,

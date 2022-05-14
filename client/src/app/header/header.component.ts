@@ -7,6 +7,9 @@ import { ModalService } from '../_modal';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  isList!: number;
+  isMenu: boolean = false;
+  isSearch: boolean = false;
   // Modalservice constructor
   constructor(private modalService: ModalService) {}
   // Gebruikersnaamtype

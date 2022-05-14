@@ -11,6 +11,7 @@ import { EmployeeModel } from './employee.model';
 })
 export class EmployeeComponent implements OnInit {
   // Alle employee types doorgeven
+  dropDownList: any = [];
   employeeSuccessMessage: any = [];
   employeeErrorMessage: any = [];
   firstname: any;
@@ -140,7 +141,7 @@ export class EmployeeComponent implements OnInit {
     this.modalService.close(id);
   }
 
-  // Zoekfunctie voor de voornaam van de werknemers
+  // Zoekfunctie voor de voornaam van de werknemersp
   Search() {
     if (this.firstname == '') {
       this.ngOnInit();

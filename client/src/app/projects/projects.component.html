@@ -1,100 +1,287 @@
 <app-header></app-header>
-<!--
-  This example requires Tailwind CSS v2.0+ 
-  
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
-<div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mt-5">
-  <button
-    (click)="clickAddProject()"
-    (click)="openModal('addProjectModal')"
-    type="submit"
-    class="group relative mb-4 w-48 flex justify-center py-2 px-1 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-  >
-    <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        class="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-    </span>
-    Add project
-  </button>
-  <div class="flex start">
+
+<body class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 mt-5">
+  <div class="w-full sm:px-6">
     <div
-      class="flex border-2 rounded-md mb-4 lg:max-w-80 md:max-w-80 sm:max-w-sm w-full"
+      class="px-4 md:px-10 py-4 md:py-7 bg-gray-100 rounded-tl-lg rounded-tr-lg"
     >
-      <input
-      [(ngModel)]="name"
-        name="name"
-        (ngModelChange)="Search()"
-        class="px-4 py-1 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600 lg:max-w-80 md:max-w-80 sm:max-w-sm w-full"
-        placeholder="Search..."
-      />
+      <div class="sm:flex items-center justify-between">
+        <p
+          class="text-base sm:text-lg md:text-xl lg:text-2xl font-bold leading-normal text-gray-800"
+        >
+          Projects
+        </p>
+        <div>
+          <button
+            (click)="modalBtn()"
+            class="inline-flex sm:ml-3 mt-4 sm:mt-0 items-start justify-start px-6 py-3 bg-indigo-700 hover:bg-indigo-600 focus:outline-none rounded"
+          >
+            <p class="text-sm font-medium leading-none text-white">
+              New Project
+            </p>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="bg-white shadow px-4 md:px-10 pt-4 md:pt-7 pb-5 overflow-y-auto"
+    >
+      <table class="w-full whitespace-nowrap">
+        <thead>
+          <tr class="h-16 w-full text-sm leading-none text-gray-800">
+            <th class="font-normal text-left pl-4">Project</th>
+            <th class="font-normal text-left pl-12">Progress</th>
+            <th class="font-normal text-left pl-12">Tasks</th>
+            <th class="font-normal text-left pl-20">Budget</th>
+            <th class="font-normal text-left pl-20">Deadline</th>
+            <th class="font-normal text-left pl-16">Members</th>
+          </tr>
+        </thead>
+        <tbody class="w-full">
+          <tr
+            *ngFor="let data of projectData"
+            class="h-20 text-sm leading-none text-gray-800 bg-white hover:bg-gray-100 border-b border-t border-gray-100"
+          >
+            <td id="{{ data.id }}" class="pl-4 cursor-pointer">
+              <div class="flex items-center">
+                <div class="w-10 h-10">
+                  <img
+                    class="w-full h-full"
+                    src="https://cdn.tuk.dev/assets/templates/olympus/projects.png"
+                  />
+                </div>
+                <div class="pl-4">
+                  <p class="font-medium">
+                    {{ data.name }}
+                  </p>
+                  <p class="text-xs leading-3 text-gray-600 pt-2">
+                    Herman Group
+                  </p>
+                </div>
+              </div>
+            </td>
+            <td class="pl-12">
+              <p class="text-sm font-medium leading-none text-gray-800">72%</p>
+              <div class="w-24 h-3 bg-gray-100 rounded-full mt-2">
+                <div class="w-20 h-3 bg-green-progress rounded-full"></div>
+              </div>
+            </td>
+            <td class="pl-12">
+              <p class="font-medium">32/47</p>
+              <p class="text-xs leading-3 text-gray-600 mt-2">
+                5 tasks pending
+              </p>
+            </td>
+            <td class="pl-20">
+              <p class="font-medium">$13,000</p>
+              <p class="text-xs leading-3 text-gray-600 mt-2">$4,200 left</p>
+            </td>
+            <td class="pl-20">
+              <p class="font-medium">22.12.21</p>
+              <p class="text-xs leading-3 text-gray-600 mt-2">34 days</p>
+            </td>
+            <td class="pl-16">
+              <div class="flex items-center">
+                <img
+                  class="shadow-md w-8 h-8 rounded-full"
+                  src="https://cdn.tuk.dev/assets/templates/olympus/projects(8).png"
+                />
+                <img
+                  class="shadow-md w-8 h-8 rounded-full -ml-2"
+                  src="https://cdn.tuk.dev/assets/templates/olympus/projects(9).png"
+                />
+                <img
+                  class="shadow-md w-8 h-8 rounded-full -ml-2"
+                  src="https://cdn.tuk.dev/assets/templates/olympus/projects(10).png"
+                />
+                <img
+                  class="shadow-md w-8 h-8 rounded-full -ml-2"
+                  src="https://cdn.tuk.dev/assets/templates/olympus/projects(11).png"
+                />
+              </div>
+            </td>
+            <td class="px-7 2xl:px-0">
+              <button
+                (click)="deleteBtn()"
+                (click)="onDelete(data)"
+                class="text-indigo-600"
+              >
+                Remove
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  <div class="bg-white">
-    <div class="max-w-full lg:max-w-7xl">
-      <h2 class="sr-only">Projects</h2>
-      <div>
+</body>
+
+<div
+  [ngClass]="
+    'z-50 fixed w-full flex justify-center inset-0 ' +
+    (addModal ? 'hidden' : 'block')
+  "
+>
+  <div
+    (click)="modalBtn()"
+    class="w-full h-full bg-gray-900 z-0 absolute inset-0"
+  ></div>
+  <div class="mx-auto container">
+    <div class="flex items-center justify-center h-full w-full">
+      <div
+        class="bg-white rounded-md shadow fixed overflow-y-auto sm:h-auto w-10/12 md:w-8/12 lg:w-1/2 2xl:w-2/5"
+      >
         <div
-          class="grid grid-cols-1 gap-y-10 sm:grid-cols-2 md:grid-cols-1 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"
+          class="bg-gray-100 rounded-tl-md rounded-tr-md px-4 md:px-8 md:py-4 py-7 flex items-center justify-between"
         >
-          <div
-            (click)="openModal('addProjectModal')"
-            (click)="onEdit(data)"
-            *ngFor="let data of projectData"
-            class="shadow cursor-pointer hover:bg-gray-100 overflow-hidden border-b border-gray-200 sm:rounded-lg"
+          <p class="text-base font-semibold">Create New Project</p>
+          <button
+            role="button"
+            aria-label="close label"
+            (click)="modalBtn()"
+            class="focus:ring-2 focus:ring-offset-2 focus:ring-gray-600 focus:outline-none"
           >
-            <div class="px-6 py-4">
-              <button
-              type="button"
-              (click)="openModal('deleteConfirmModal')"
-              (click)="onDelete(data)"
-                  class="bg-red-600 hover:bg-red-700 ml-2 text-white py-1 px-2 rounded inline-flex items-center focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-600 float-right"
-                >
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-                </button>
-              <div class="font-bold text-xl mb-2">{{ data.name }}</div>
-              <p class="text-gray-700 text-base">
-                {{ data.description }}
-              </p>
-            </div>
-            <div class="px-6 pt-4 pb-2">
-              <span
-                class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"
-                >#{{ data.tag }}</span
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 28 28"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M21 7L7 21"
+                stroke="#A1A1AA"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+              <path
+                d="M7 7L21 21"
+                stroke="#A1A1AA"
+                stroke-width="1.75"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div class="px-4 md:px-10 pt-6 md:pt-12 md:pb-4 pb-7">
+          <div class="flex items-center justify-center">
+            <div
+              tabindex="0"
+              aria-label="img"
+              role="img"
+              class="focus:outline-none w-40 h-40 p-16 bg-gray-100 rounded-md flex items-center justify-center"
+            >
+              <svg
+                width="36"
+                height="36"
+                viewBox="0 0 36 36"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
+                <path
+                  d="M22.5 12H22.515"
+                  stroke="#94A3B8"
+                  stroke-width="2.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M25.5 6H10.5C8.01472 6 6 8.01472 6 10.5V25.5C6 27.9853 8.01472 30 10.5 30H25.5C27.9853 30 30 27.9853 30 25.5V10.5C30 8.01472 27.9853 6 25.5 6Z"
+                  stroke="#94A3B8"
+                  stroke-width="2.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M6 22.4999L12 16.4999C12.6841 15.8417 13.4601 15.4951 14.25 15.4951C15.0399 15.4951 15.8159 15.8417 16.5 16.4999L24 23.9999"
+                  stroke="#94A3B8"
+                  stroke-width="2.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+                <path
+                  d="M21 20.9999L22.5 19.4999C23.1841 18.8417 23.9601 18.4951 24.75 18.4951C25.5399 18.4951 26.3159 18.8417 27 19.4999L30 22.4999"
+                  stroke="#94A3B8"
+                  stroke-width="2.25"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                ></path>
+              </svg>
             </div>
+          </div>
+          <form [formGroup]="formValue" class="mt-11">
+            <div class="flex items-center space-x-9">
+              <input
+                formControlName="name"
+                placeholder="Name"
+                class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200"
+              />
+              <input
+                placeholder="Age"
+                type="number"
+                min="0"
+                class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200"
+              />
+            </div>
+            <div class="flex items-center space-x-9 mt-8">
+              <input
+                placeholder="Email"
+                type="email"
+                class="focus:ring-2 focus:ring-gray-400 w-1/2 focus:outline-none placeholder-gray-500 py-3 px-3 text-sm leading-none text-gray-800 bg-white border rounded border-gray-200"
+              />
+              <div
+                tabindex="0"
+                class="focus:outline-none focus:ring-2 focus:ring-gray-400 w-1/2 bg-white border rounded border-gray-200 py-2.5 px-3"
+              >
+                <select
+                  aria-label="select an option"
+                  class="text-sm text-gray-500 w-full focus:outline-none"
+                >
+                  <option selected="" disabled="" value="">Category</option>
+                  <option>Designer</option>
+                  <option>Developer</option>
+                </select>
+              </div>
+            </div>
+            <div class="mt-8">
+              <textarea
+                placeholder="Description"
+                class="focus:ring-2 focus:ring-gray-400 py-3 pl-3 overflow-y-auto h-24 border placeholder-gray-500 rounded border-gray-200 w-full resize-none focus:outline-none"
+              ></textarea>
+            </div>
+          </form>
+          <div class="flex items-center justify-between mt-9">
+            <button
+              role="button"
+              aria-label="close button"
+              (click)="modalBtn()"
+              class="focus:ring-2 focus:ring-offset-2 focus:bg-gray-600 focus:ring-gray-600 focus:outline-none px-6 py-3 bg-gray-600 hover:bg-gray-500 shadow rounded text-sm text-white"
+            >
+              Cancel
+            </button>
+            <button
+              (click)="modalBtn()"
+              (click)="postProject()"
+              role="button"
+              class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-800 focus:outline-none px-6 py-3 bg-indigo-700 hover:bg-opacity-80 shadow rounded text-sm text-white"
+            >
+              Add
+            </button>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
-<jw-modal class="hidden" id="deleteConfirmModal">
+
+<div
+  [ngClass]="
+    'z-50 fixed w-full flex justify-center inset-0 ' +
+    (deleteConfirmModal ? 'hidden' : 'block')
+  "
+>
   <div
     class="fixed z-10 inset-0 overflow-y-auto"
     aria-labelledby="modal-title"
@@ -105,6 +292,7 @@
       class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
     >
       <div
+        (click)="deleteBtn()"
         class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
         aria-hidden="true"
       ></div>
@@ -156,6 +344,7 @@
         </div>
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
           <button
+            (click)="deleteBtn()"
             (click)="deleteProjectDetail(data.id)"
             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm"
           >
@@ -173,174 +362,4 @@
       </div>
     </div>
   </div>
-</jw-modal>
-<jw-modal class="hidden" id="addProjectModal">
-  <div
-    class="fixed z-10 inset-0 overflow-y-auto transition"
-    aria-labelledby="modal-title"
-    role="dialog"
-    aria-modal="true"
-  >
-    <div
-      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-    >
-      <div
-        class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-        aria-hidden="true"
-      ></div>
-      <span
-        class="hidden sm:inline-block sm:align-middle sm:h-screen"
-        aria-hidden="true"
-        >&#8203;</span
-      >
-      <div
-        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:my-8 lg:max-w-lg md:max-w-md sm:max-w-sm w-full"
-      >
-        <form [formGroup]="formValue" class="mt-8 space-y-6 px-6">
-          <input type="hidden" name="remember" value="true" />
-          <div>
-            <label for="name" class="sr-only">Name</label>
-            <input
-              formControlName="name"
-              type="text"
-              autocomplete="name"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Name"
-            />
-            <span
-              class="text-rose-600 mb-0 text-sm"
-              *ngIf="
-                formValue.controls['name'].dirty &&
-                formValue.hasError('required', 'name')
-              "
-              >Name is required</span
-            >
-            <span
-              class="text-rose-600 text-sm"
-              *ngIf="formValue.controls['name'].errors?.['minlength']"
-            >
-              Firstname must be at least 2 characters long.
-            </span>
-          </div>
-          <div>
-            <label for="description" class="sr-only">Description</label>
-            <input
-              formControlName="description"
-              type="text"
-              autocomplete="description"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Description"
-            />
-            <span
-              class="text-rose-600 mb-0 text-sm"
-              *ngIf="
-                formValue.controls['description'].dirty &&
-                formValue.hasError('required', 'description')
-              "
-              >Description is required</span
-            >
-            <span
-              class="text-rose-600 text-sm"
-              *ngIf="formValue.controls['description'].errors?.['description']"
-            >
-              Description must be at least 10 characters long.
-            </span>
-          </div>
-          <div>
-            <label for="tag" class="sr-only">Tag</label>
-            <input
-              formControlName="tag"
-              type="text"
-              autocomplete="tag"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="#Tag"
-            />
-            <span
-              class="text-rose-600 mb-0 text-sm"
-              *ngIf="
-                formValue.controls['tag'].dirty &&
-                formValue.hasError('required', 'tag')
-              "
-              >Tag is required</span
-            >
-            <span
-              class="text-rose-600 text-sm"
-              *ngIf="formValue.controls['tag'].errors?.['tag']"
-            >
-              Tag must be at least 2 characters long.
-            </span>
-          </div>
-          <div>
-            <label for="status" class="sr-only">Status</label>
-            <input
-              formControlName="status"
-              type="text"
-              autocomplete="status"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Status"
-            />
-            <span
-              class="text-rose-600 mb-0 text-sm"
-              *ngIf="
-                formValue.controls['status'].dirty &&
-                formValue.hasError('required', 'status')
-              "
-              >Status is required</span
-            >
-          </div>
-          <div>
-            <label for="employees" class="sr-only">Employees</label>
-            <input
-              formControlName="employees"
-              type="text"
-              autocomplete="employees"
-              required
-              class="appearance-none rounded-none relative block w-full px-3 py-2 border rounded-b-md border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-              placeholder="Employees"
-            />
-            <span
-              class="text-rose-600 mb-0 text-sm"
-              *ngIf="
-                formValue.controls['employees'].dirty &&
-                formValue.hasError('required', 'employees')
-              "
-              >Employees is required</span
-            >
-          </div>
-          <div>
-            <button
-              *ngIf="showAdd"
-              (click)="postProject()"
-              (click)="closeModal('addProjectModal')"
-              type="button"
-              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Add
-            </button>
-            <button
-              *ngIf="showUpdate"
-              (click)="closeModal('addProjectModal')"
-              (click)="editProjectDetail(data.id)"
-              type="button"
-              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Update
-            </button>
-            <button
-              (click)="closeModal('addProjectModal')"
-              id="closeButton"
-              type="button"
-              class="mt-3 mb-3 group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-black bg-gray-200 hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-            >
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
-</jw-modal>
+</div>
